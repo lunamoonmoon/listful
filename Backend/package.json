@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build": "npx",
-    "start": "npx node src/index.js"
+    "start": "npx node src/index.js",
+    "reset": "psql -U development -d listful < ./src/database/schemas/create.sql && psql -U development -d listful < ./src/database/schemas/development.sql"
   }
 }
