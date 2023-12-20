@@ -13,15 +13,13 @@ module.exports = db => {
     const getAllBooks = () => {
       return db
         .query(`
-          SELECT 
-          json_agg(
-              json_build_object(
-                'id', books.id,
-                'library_id', books.library_id,
-                'name', books.name,
-                'author', books.author,
-              )
-            ) as book_data
+          SELECT json_agg(
+            json_build_object(
+              'id', books.id,
+              'library_id', books.library_id,
+              'name', books.name,
+              'author', books.author,
+            )) as book_data
           FROM books;
           `)
         .then(({ rows }) => {
