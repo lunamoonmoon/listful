@@ -20,13 +20,47 @@ router.get("/books", (req, res) => {
 
   //getAllBooks();
 
+  //returning as raw JSON for resting purposes, see commented
   const getBookByAuthor = () => {
+    return db.query(`SELECT from books
+    WHERE author = books.author`)
+    .then(({ rows }) => {
+      console.log(rows);
+      res.json(rows);
+    });
 
   }
 
-  getBookByTitle = () => {
+  //returning as raw JSON for resting purposes, see commented
+  const getBookByTitle = () => {
+    return db.query(`SELECT from books 
+    WHERE author = books.title`)
+    .then(({ rows }) => {
+      console.log(rows);
+      res.json(rows);
+    });
 
   }
+
+  // const getBookByAuthor = () => {
+  //   return db.query(`SELECT from books
+  //   WHERE author = books.author`)
+  //     .then(data => {
+  //       return data.rows
+  //     });
+
+  // }
+
+  // const getPinsByMapId = (id) => {
+  //   //is this a pool query?
+  //   return db.query(`SELECT * FROM locations
+  //   WHERE id = locations.id`, [])
+  //     .then(data => {
+  //       return data.rows;
+  //     });
+  // };
+
+
 
   postBook = () => {
 
@@ -35,4 +69,6 @@ router.get("/books", (req, res) => {
 
 });
 
+
+//do we need to export these functions? I think so...- Jeremy
   module.exports = router;
