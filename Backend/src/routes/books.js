@@ -18,7 +18,21 @@ router.get("/books", (req, res) => {
       });
   };
 
-  getAllBooks();
+  //getAllBooks();
+
+  const getBookByAuthor = () => {
+
+  }
+
+  getBookByTitle = () => {
+
+  }
+
+  postBook = () => {
+
+  }
+
+
 });
 
   module.exports = router;
