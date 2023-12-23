@@ -21,7 +21,8 @@ router.get("/books", (req, res) => {
   //getAllBooks();
 
   //returning as raw JSON for resting purposes, see commented
-  const getBookByAuthor = () => {
+  //possible make it a general object pass to the param
+  const getBookByAuthor = (author) => {
     return db.query(`SELECT from books
     WHERE author = books.author`)
     .then(({ rows }) => {
@@ -31,8 +32,8 @@ router.get("/books", (req, res) => {
 
   }
 
-  //returning as raw JSON for resting purposes, see commented
-  const getBookByTitle = () => {
+  //returning as raw JSON for testing purposes, see commented
+  const getBookByTitle = (title) => {
     return db.query(`SELECT from books 
     WHERE author = books.title`)
     .then(({ rows }) => {
@@ -41,6 +42,19 @@ router.get("/books", (req, res) => {
     });
 
   }
+
+  //returning as raw JSON for testing purposes
+  const getBooksByUser = (userID) => {
+    return db.query(`SELECT from books 
+    WHERE id = books.id`)
+    .then(({ rows }) => {
+      console.log(rows);
+      res.json(rows);
+    });
+
+  }
+
+  
 
   // const getBookByAuthor = () => {
   //   return db.query(`SELECT from books
