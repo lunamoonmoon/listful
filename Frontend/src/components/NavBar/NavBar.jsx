@@ -1,28 +1,34 @@
-//import Modal from "../LoginModal/Modal";
-//import logo! 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import About from "../About/About";
 
-
-export default function NavBar( {isLoggedIn} ) {
+export default function NavBar({ isLoggedIn }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  const [modalContent, setModalContent] = React.useState(null);
+  const [modalType, setModalType] = React.useState(null);
 
   const handleAboutUsClick = () => {
-    setModalContent(<About />);
     setIsModalOpen(true);
   };
 
   const handleSignUpLogInClick = () => {
-    //setModalContent(<SignUpLogIn />);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setModalContent(null);
+    setModalType(null);
     setIsModalOpen(false);
   };
+//for the modal, we need to pass in the modal content and the modal type - conditional rendering 
+  // React.useEffect(() => {
+  //   // Update modalContent based on the modalType
+  //   if (modalType === "About") {
+  //     setModalContent(<About />);
+  //   } else if (modalType === "signUp") {
+  //     setModalContent(<SignUpLoginPage />);
+  //   }
+  // }, [modalType]);
 
   return (
     <nav>
@@ -44,11 +50,10 @@ export default function NavBar( {isLoggedIn} ) {
           </>
         )}
         <button onClick={handleAboutUsClick}>About Us</button>
-        {isModalOpen && <About closeModal={closeModal} />}
+        {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
 
-        <button onClick={() => handleSignUpLogInClick()}>Sign Up/Log In</button>
-        {/* {isModalOpen && <SignUpLogIn closeModal={closeModal} />} */}
+        <button onClick={handleSignUpLogInClick}>Sign Up/Log In</button>
       </div>
     </nav>
   );
-};
+}
