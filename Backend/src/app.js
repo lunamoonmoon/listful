@@ -7,7 +7,6 @@ const bodyparser = require("body-parser");
 const app = express();
 
 const db = require("./database")
-
 const books = require("./routes/books");
 
 function read(file) {
