@@ -1,3 +1,4 @@
+//console.log("Starting database connection setup...");
 const { Pool } = require("pg");
 require('dotenv').config();
 
@@ -13,7 +14,14 @@ const db = new Pool(dbParams);
 
 db
   .connect()
-  .then(() => console.log('Successful connection!'))
-  .catch(e => console.log(`Error connecting to Postgres server:\n${e}`));
+  .then(() => {
+    console.log('Successful connection!');
+    // A simple query to test the database connection right here
+    // return db.query('SELECT * FROM books LIMIT 1;');
+  })
+  .then(res => console.log('Test query result:', res.rows))
+  .catch(e => console.error('Error during test query:', e));
+
+//console.log("Logging the dbparams:", dbParams);
 
 module.exports = db;
