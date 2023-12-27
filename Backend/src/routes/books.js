@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { query } = require("express");
 const db = require("../database/index.js");
 
+//GET ROUTES
+
 router.get("/books", (req, res) => {
 
     //A get request to retreive information about books from a database
@@ -34,6 +36,7 @@ router.get("/books", (req, res) => {
 
     const getBookByAuthor = (authorName) => {
       const queryString = `SELECT * FROM books WHERE author = $1`;
+      //logs for testing purposes, delete for production
       console.log('QueryString:', queryString);
       console.log('AuthorName:', authorName);
       console.log('getBooksByAuthorName triggering')
@@ -51,64 +54,56 @@ router.get("/books", (req, res) => {
     getBookByAuthor(authorName);
   });
   
-  // const getBookByAuthor = (authorName) => {
-  //   const queryString = `SELECT * FROM books WHERE author = $1`;
-  //   return db.query(queryString, [author]) // Pass author as a parameter to the query
-  //   .then(({ rows }) => {
-  //     console.log(rows);
-  //     res.json(rows);
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //     res.status(500).json({ error: "Internal server error" });
-  //   });
-  // }
+  //name is the title of the book
+  //tested manually and with postman - Jeremy
+  router.get("/books/name", (req, res) => {
+    const name = req.query.name
+    // const name = "Twilight"
 
-  
+    const getBookByTitle = (name) => {
+          const queryString = `SELECT * FROM books WHERE name =$1`
+          console.log('QueryString:', queryString);
+          return db.query(queryString, [name])
+          .then(({ rows }) => {
+            console.log(rows);
+            res.json(rows);
+            // return data.rows[0]
+          })
+          .catch(error => {
+            console.error(error);
+            res.status(500).json({ error: "Internal server error" });
+          });
+      
+        }
 
-  
-//   router.get("/books/title", (req, res) => {
-//     const bookTitle = req.body.title
-//   })
-//   //returning as raw JSON for testing purposes, see commented
-//   const getBookByTitle = (title) => {
-//     const queryString = `SELECT * FROM books WHERE title =$1`
-//     return db.query(queryString, [title])
-//     .then(({ rows }) => {
-//       console.log(rows);
-//       res.json(rows);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).json({ error: "Internal server error" });
-//     });
+    getBookByTitle(name)
+  })
 
-//   }
+  //POST ROUTES
 
-//   //returning as raw JSON for testing purposes
-//   router.get("/books:", (req, res) => {
-//     const userID = req.body.userID //I don't konw if this is right, but it's what Larry AI recommended
-//   })
-//   const getBooksByUser = (userID) => {
-//     const queryString = `SELECT * FROM books WHERE users.id = $1`
-//     return db.query(queryString, [userID])
-//     .then(({ rows }) => {
-//       console.log(rows);
-//       res.json(rows);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).json({ error: "Internal server error" });
-//     });
+router.post("/books/insert", (req, res) => {
 
-//   }
+  const insertNewBook = (newBookObject) => {
+  const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
+   VALUES ($1, $2, $3, $4, $5, $6)`;
 
-// //add POST routes
+   const values = [
+    newBookObject.library_id,
+    newBookObject.name,
+    newBookObject, author,
+    newBookObject.rating,
+    newBookObject.notes,
+    newBookObject.ownership
+   ]
 
-// //I BECAME QUITE CONFUSED DOING THIS WHEN I COMPARED TO HOW I DID IT IN THE MIDTERM
-// const addBook = (library_id, name, author, rating, notes, ownership) => {
+   return db.query(queryString, values)
+   
 
-  
+
+}
+})
+
+
 //     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
 //     VALUES ($1, $2, $3, $4, $5, $6)`;
     
@@ -137,6 +132,8 @@ router.get("/books", (req, res) => {
 //     console.error(error)
 //     res.status(500).json({error: "Internal server error"})
 //   })
+//   //returning as raw JSON for testing purpose
+//   
 
 // })//END ROUTER
 
