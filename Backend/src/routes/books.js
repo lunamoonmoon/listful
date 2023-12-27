@@ -97,12 +97,19 @@ router.post("/books/insert", (req, res) => {
    ]
 
    return db.query(queryString, values)
-   
+
 
 
 }
 })
 
+//POST CREATE LIBRARY
+
+router.post("/library/create", (req, res) => {
+
+
+  
+})
 
 //     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
 //     VALUES ($1, $2, $3, $4, $5, $6)`;
