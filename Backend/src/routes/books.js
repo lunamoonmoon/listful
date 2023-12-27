@@ -6,108 +6,166 @@ router.get("/books", (req, res) => {
 
     //A get request to retreive information about books from a database
     //Table BOOKS (ID, LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
+    const getAllBooks = () => {
+      return db
+        .query(`
+          SELECT *
+          FROM books;
+          `)
+        .then(({ rows }) => {
+          console.log(rows);
+          res.json(rows);
+        });
+        
+    };  
+    
+    getAllBooks()
 
-  const getAllBooks = () => {
-    return db
-      .query(`
-        SELECT *
-        FROM books;
-        `)
+});
+
+//   //returning as raw JSON for resting purposes, see commented
+//   //possible make it a general object pass to the param
+
+//   //with assistance from lary AI bot
+  router.get("/books/author", (req, res) => {
+    const authorName = req.query.author
+    // const authorName = req.body.author; // Get the author's name from the query string
+    //const authorName = 'Joseph Heller' // this line for testing only, comment out and uncomment out above line
+
+    const getBookByAuthor = (authorName) => {
+      const queryString = `SELECT * FROM books WHERE author = $1`;
+      console.log('QueryString:', queryString);
+      console.log('AuthorName:', authorName);
+      console.log('getBooksByAuthorName triggering')
+      return db.query(queryString, [authorName]) // Pass author as a parameter to the query
       .then(({ rows }) => {
         console.log(rows);
         res.json(rows);
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
       });
-  };
+    }
 
-  getAllBooks();
-
-  //returning as raw JSON for resting purposes, see commented
-  //possible make it a general object pass to the param
-
-  //with assistance from lary AI bot
-  router.get("/books/author", (req, res) => {
-    const authorName = req.body.author; // Get the author's name from the query string
     getBookByAuthor(authorName);
   });
   
-  const getBookByAuthor = (authorName) => {
-    const queryString = `SELECT * FROM books WHERE author = $1`;
-    return db.query(queryString, [author]) // Pass author as a parameter to the query
-    .then(({ rows }) => {
-      console.log(rows);
-      res.json(rows);
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
-    });
-  }
-
-  
-  router.get("/books/title", (req, res) => {
-    const bookTitle = req.body.title
-  })
-  //returning as raw JSON for testing purposes, see commented
-  const getBookByTitle = (title) => {
-    const queryString = `SELECT * FROM books WHERE title =$1`
-    return db.query(queryString, [title])
-    .then(({ rows }) => {
-      console.log(rows);
-      res.json(rows);
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
-    });
-
-  }
-
-  //returning as raw JSON for testing purposes
-  router.get("/books:", (req, res) => {
-    const userID = req.body.userID //I don't konw if this is right, but it's what Larry AI recommended
-  })
-  const getBooksByUser = (userID) => {
-    const queryString = `SELECT * FROM books WHERE users.id = $1`
-    return db.query(queryString, [userID])
-    .then(({ rows }) => {
-      console.log(rows);
-      res.json(rows);
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
-    });
-
-  }
-
-
-
-  // const getBookByAuthor = () => {
-  //   return db.query(`SELECT from books
-  //   WHERE author = books.author`)
-  //     .then(data => {
-  //       return data.rows
-  //     });
-
+  // const getBookByAuthor = (authorName) => {
+  //   const queryString = `SELECT * FROM books WHERE author = $1`;
+  //   return db.query(queryString, [author]) // Pass author as a parameter to the query
+  //   .then(({ rows }) => {
+  //     console.log(rows);
+  //     res.json(rows);
+  //   })
+  //   .catch(error => {
+  //     console.error(error);
+  //     res.status(500).json({ error: "Internal server error" });
+  //   });
   // }
 
-  // const getPinsByMapId = (id) => {
-  //   //is this a pool query?
-  //   return db.query(`SELECT * FROM locations
-  //   WHERE id = locations.id`, [])
-  //     .then(data => {
-  //       return data.rows;
-  //     });
-  // };
+  
+
+  
+//   router.get("/books/title", (req, res) => {
+//     const bookTitle = req.body.title
+//   })
+//   //returning as raw JSON for testing purposes, see commented
+//   const getBookByTitle = (title) => {
+//     const queryString = `SELECT * FROM books WHERE title =$1`
+//     return db.query(queryString, [title])
+//     .then(({ rows }) => {
+//       console.log(rows);
+//       res.json(rows);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       res.status(500).json({ error: "Internal server error" });
+//     });
+
+//   }
+
+//   //returning as raw JSON for testing purposes
+//   router.get("/books:", (req, res) => {
+//     const userID = req.body.userID //I don't konw if this is right, but it's what Larry AI recommended
+//   })
+//   const getBooksByUser = (userID) => {
+//     const queryString = `SELECT * FROM books WHERE users.id = $1`
+//     return db.query(queryString, [userID])
+//     .then(({ rows }) => {
+//       console.log(rows);
+//       res.json(rows);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       res.status(500).json({ error: "Internal server error" });
+//     });
+
+//   }
+
+// //add POST routes
+
+// //I BECAME QUITE CONFUSED DOING THIS WHEN I COMPARED TO HOW I DID IT IN THE MIDTERM
+// const addBook = (library_id, name, author, rating, notes, ownership) => {
+
+  
+//     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
+//     VALUES ($1, $2, $3, $4, $5, $6)`;
+    
+    
+//     return db.query(queryString, [library_id, name, author, rating, notes, ownership])
+//     .then(({ rows }) => {
+//       console.log(rows);
+//       res.json(rows);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       res.status(500).json({ error: "Internal server error" });
+//     });
+//   } 
+
+// router.get("/books/add", (req, res) => {
+//   const {library_id, name, author, rating, notes, ownership} = req.body
+//   //I am uncertain about the structure of the body, ergo, I am unclear how to pull out the variables
+
+//   addBook(library_id, name, author, rating, notes, ownership)
+//   .then((result) => {
+//     console.log(result.rows)
+//     res.json(result.rows)
+//   })
+//   .catch((error) => {
+//     console.error(error)
+//     res.status(500).json({error: "Internal server error"})
+//   })
+
+// })//END ROUTER
 
 
+// //THE BELOW IS FROM OUR MIDTERM WHEN WE WERE ADDING LOCATIONS TO THE MAP
+// // const addLocations = (dataObj) => {
 
-  postBook = () => {
+// //   //pre-emptive debugging
+// //   console.log("query file, add locations function triggered")
+// //   console.log("dataObject received", dataObj)
 
-  }
+// //   let data = [dataObj.title, dataObj.description, dataObj.map_id, dataObj.latitude, dataObj.longitude]
+// //   return db.query(`INSERT INTO locations (title, description, map_id, latitude, longitude)
+// //   VALUES ($1, $2, $3, $4, $5)
+// //   RETURNING *`, data)
+// //   .then(data => {
+// //     return data.rows[0]
+// //   })
+// //   .catch((err)=> {
+// //     console.log("insert query error msg: ", err)
+// //   })
 
 
-});
+// // }
+
+
+// });
+
+//comment to test git
 
 
 //do we need to export these functions? I think so...- Jeremy
