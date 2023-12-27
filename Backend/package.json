@@ -10,6 +10,15 @@
   "scripts": {
     "build": "npx",
     "start": "npx node server.js",
+    "test": "jest",
     "reset": "psql -U development -d listful < ./src/database/schemas/create.sql && psql -U development -d listful < ./src/database/schemas/development.sql"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js$",
+    "moduleFileExtensions": ["js", "json", "node"]
   }
 }

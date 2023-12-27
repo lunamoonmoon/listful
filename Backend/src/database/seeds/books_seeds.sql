@@ -1,1 +1,0 @@
-INSERT INTO books (name, author, rating, notes, ownership) VALUES ('Isaac', 'isaac@example.com', 5, 'Luna', true);

@@ -23,8 +23,8 @@ router.get("/books", (req, res) => {
 
 });
 
-//   //returning as raw JSON for resting purposes, see commented
-//   //possible make it a general object pass to the param
+//returning as raw JSON for resting purposes, see commented
+//possible make it a general object pass to the param
 
 //   //with assistance from lary AI bot
   router.get("/books/author", (req, res) => {

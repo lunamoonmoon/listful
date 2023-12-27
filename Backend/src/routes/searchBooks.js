@@ -8,17 +8,18 @@ const searchBooks = async (query) => {
   const apiUrl = 'https://www.googleapis.com/books/v1/volumes';
 
   try {
-    const res = await axios.get(apiUrl, {
+    const res = await axios.get(apiUrl, { //api request
       params: {
         q: query,
         key: apiKey,
       },
     });
 
-    const volumes = res.data.items;
+    const volumes = res.data.items; //handle api response
     if (!volumes) {
       throw new Error('No results for this search.');
     }
+    //map results into new array name, author
     const bookResults = volumes.map((volume) => ({
       Name: volume.volumeInfo.title,
       Author: volume.volumeInfo.authors,
@@ -30,17 +31,5 @@ const searchBooks = async (query) => {
     throw err;
   }
 };
-
-
-// Use function example
-// const query = 'Harry Potter';
-// searchBooks(query)
-//   .then((results) => {
-//     console.log('Search Results', results);
-//   })
-//   .catch((error) => {
-//     // Handle errors
-//     console.error('Error:', error);
-//   });
 
 module.exports = { searchBooks };
