@@ -1,6 +1,8 @@
 const axios = require('axios');
 require('dotenv').config();
 
+//fetch data from api
+//get results of a users search from api
 const searchBooks = async (query) => {
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
   const apiUrl = 'https://www.googleapis.com/books/v1/volumes';
@@ -13,16 +15,16 @@ const searchBooks = async (query) => {
       },
     });
 
-    const volume = res.data.items;
-
-    if (volume) {
-      return volume.map((volume) => ({
-        title: volume.volumeInfo.title,
-        authors: volume.volumeInfo.authors,
-      }));
+    const volumes = res.data.items;
+    if (!volumes) {
+      throw new Error('No results for this search.');
     }
+    const bookResults = volumes.map((volume) => ({
+      Name: volume.volumeInfo.title,
+      Author: volume.volumeInfo.authors,
+    }));
 
-      return [];
+    return bookResults;
   } catch (err) {
     console.error(err);
     throw err;
@@ -31,15 +33,14 @@ const searchBooks = async (query) => {
 
 
 // Use function example
-// const searchQuery = 'Harry Potter';
-// searchBooks(searchQuery)
-//   .then((books) => {
-//     // Handle the retrieved book data (e.g., add to the database)
-//     console.log('Books:', books);
+// const query = 'Harry Potter';
+// searchBooks(query)
+//   .then((results) => {
+//     console.log('Search Results', results);
 //   })
 //   .catch((error) => {
 //     // Handle errors
-//     console.error('Error:', error.message);
+//     console.error('Error:', error);
 //   });
 
 module.exports = { searchBooks };

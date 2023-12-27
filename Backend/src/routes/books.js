@@ -19,7 +19,7 @@ router.get("/books", (req, res) => {
       });
   };
 
-  //getAllBooks();
+  getAllBooks();
 
   //returning as raw JSON for resting purposes, see commented
   //possible make it a general object pass to the param
