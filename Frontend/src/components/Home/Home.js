@@ -17,7 +17,11 @@ export default function Home() {
   }, []);
 
   //map through db libraries displaying its books
+  //we only want to map through the libraries IF someone is logged in - need to implement this functionality
   return (
+//       <h1>Save all your favourite books in one spot</h1>
+//       <p>Organize your books, one list at a time with your Listful Library, a web app that collates your library in one easy location.</p>
+//       <button>Sign Up Now</button>
     <div data-testid='Home'>
       <script src="Frontend/public/listful_logo.png"></script>
       {libraries.map((library) => (
