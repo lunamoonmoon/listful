@@ -76,8 +76,49 @@ router.get("/books", (req, res) => {
       
         }
 
-    getBookByTitle(name)
+    getBookByTitle(name);
   })
+
+  router.get("/libraries", (req, res) => {
+
+    //A get request to retreive information about libraries from db
+    const getAllLibraries = () => {
+      return db
+        .query(`
+          SELECT *
+          FROM Libraries;
+          `)
+        .then(({ rows }) => {
+          console.log(rows);
+          res.json(rows);
+        });
+        
+    };  
+    
+    getAllLibraries()
+
+});
+
+router.get("/libraries/:library_id", (req, res) => {
+  const { library_id } = req.params;
+
+  //A get request to retreive the books in a specific library from db
+  const getLibraryBooks = () => {
+    return db
+      .query(`
+        SELECT *
+        FROM Books
+        WHERE LIBRARY_ID = $1;
+        `, [library_id])
+      .then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
+      });
+  };
+
+  getLibraryBooks();
+});
+
 
   //POST ROUTES
 
@@ -102,7 +143,6 @@ router.post("/books/insert", (req, res) => {
 
 }
 })
-
 
 //     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
 //     VALUES ($1, $2, $3, $4, $5, $6)`;
