@@ -27,8 +27,6 @@ export default function BookModal(props) {
   )
 }
 
-export default Modal;
-
 
 //views to render in modal instead of several modals - views and ejs files in Tinyapp but react does not use this. Read documentation for more
 //conditional rendering  - use state to monitor it
