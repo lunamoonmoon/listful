@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { query } = require("express");
 const db = require("../database/index.js");
+router.use(express.json()); 
 
 //GET ROUTES
 

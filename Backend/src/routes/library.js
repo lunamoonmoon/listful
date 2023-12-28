@@ -1,6 +1,8 @@
+const express = require("express");
 const router = require("express").Router();
 const { query } = require("express");
 const db = require("../database/index.js");
+router.use(express.json()); 
 
 
 // As a user, I want to easily categorize items/lists in my library
@@ -12,6 +14,14 @@ const db = require("../database/index.js");
 // Can move items between lists (stretch)
 
 router.post("/library/create", (req, res) => {
+
+  //you would be choosing to pack in as a object for transfer. It is not coming as an object
+  const newLibraryObj = {
+    user_id: req.body.user_id,
+    public_boolean: req.body.public_boolean,
+    library_name: req.body.library_name
+
+  }
 
   const createLibrary = (newLibraryObj) => {
   
@@ -25,12 +35,13 @@ router.post("/library/create", (req, res) => {
       newLibraryObj.library_name
     ]
 
+  //the below is based on Jeremy's midterm projecdt    
     return db.query(queryString, values)
     .then((data) => {
     return data.rows[0]
     })
     .catch((err) => {
-    console.log("create map error message: ", err)
+    console.log("create map library error message: ", err)
     });
 
   
