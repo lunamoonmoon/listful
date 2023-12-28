@@ -51,7 +51,6 @@ export default function NavBar({ isLoggedIn }) {
         )}
         <button onClick={handleAboutUsClick}>About Us</button>
         {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
-
         <button onClick={handleSignUpLogInClick}>Sign Up/Log In</button>
       </div>
     </nav>
