@@ -11,6 +11,7 @@ export default function Book(libraryId) {
       .then(data => setBooks(data))
       .catch(err => console.error(`Error fetching books: ${err}`))
   }, [libraryId]);
+  
 
   return (
     <div data-testid='Book'>

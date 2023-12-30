@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import About from "../About/About";
+import Searchbar from "../Searchbar/Searchbar";
 
 export default function NavBar({ isLoggedIn }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,12 +33,14 @@ export default function NavBar({ isLoggedIn }) {
 
   return (
     <nav>
-      <div className="logo">Logo</div>
+      <div className="logo">
+        <img className="listful-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"}/>
+      </div>
       <div className="buttons">
         {isLoggedIn ? (
           <>
             <button>Catalog</button>
-            <button>Search</button>
+            <Searchbar/>
           </>
         ) : (
           <>
@@ -45,7 +48,7 @@ export default function NavBar({ isLoggedIn }) {
               Catalog
             </button>
             <button disabled onClick={() => alert('Please log in to search our collection')}>
-              Search
+              <Searchbar/>
             </button>
           </>
         )}
