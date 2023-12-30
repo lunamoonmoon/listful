@@ -15,21 +15,19 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
+    <>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-        <li><a href="#team-members">Team Members</a></li>
-        <li><a href="#Acknowledgments">Acknowledgments</a></li>
-      </ul>
-    </li>
+      <a href="#built-with">Built With</a>
+      <a href="#team-members">Team Members</a>
+      <a href="#Acknowledgments">Acknowledgments</a>
+    </>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Product Name Screen Shot][product-screenshot]
+[Frontend/public/listful_logo.png][product-screenshot]
 
 Listful allows users to keep track of their library - on the go! Never again come home with a new book only to discover you already own it. Keep track of what volumes you own and which ones you are still looking to buy. Make libraries of books you love, track what you own, and make notes of your thoughts.
 
@@ -44,11 +42,11 @@ Thank you for checking out our final project!
 
 ### Built With
 
-* [React][React.js]
-* [Javascript][Javascript.js]
-* [PostgresSQL][PostgresSQL.org]
-* [Node][Node.js]
-* [Express][Expressjs.com]
+* [React](React.js)
+* [Javascript](Javascript.js)
+* [PostgresSQL](PostgresSQL.org)
+* [Node](Node.js)
+* [Express](Expressjs.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -56,10 +54,10 @@ Thank you for checking out our final project!
 <!-- TEAM MEMBERS -->
 ## Team Members
 
-India - [India on Github](https://github.com/icornell), []()
-Jeremy - [Jeremy on Github](https://github.com/Jerscape), []()
-Luna - [Luna on Github](https://github.com/lunamoonmoon), []()
-Taylor - [Taylor on Github](https://github.com/moogleKupo), []()
+* India - [Github](https://github.com/icornell), []()
+* Jeremy - [Github](https://github.com/Jerscape), []()
+* Luna - [Github](https://github.com/lunamoonmoon), []()
+* Taylor - [Github](https://github.com/moogleKupo), []()
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -69,7 +67,7 @@ Taylor - [Taylor on Github](https://github.com/moogleKupo), []()
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+We would like to acknowledge the following resources.
 
 * [Google Books API](https://developers.google.com/books)
 * [React Icons](https://react-icons.github.io/react-icons/search)
