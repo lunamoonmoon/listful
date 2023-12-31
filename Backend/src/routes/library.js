@@ -51,6 +51,20 @@ router.post("/library/create", (req, res) => {
   
 })
 
+//GET BOOKS BY LIBRARY ID
+
+router.get("library/id", (req, res)=> {
+
+  const queryString = `SELECT * FROM books WHERE library_id = $1`;
+
+  const loadLibrary = () => {
+    
+  }
+
+})
+
+
+
 //JN pull book where library = (and other filters?) 
 
 
