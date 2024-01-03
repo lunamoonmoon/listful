@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function Searchbar() {
+export default function Searchbar({isLoggedIn}) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const [text, setText] = useState('');
 
   const handleSubmit = async (e) => {
@@ -10,9 +12,8 @@ export default function Searchbar() {
       const searchResults = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${text}`
       );
-      {
-        //display response
-      }
+      setSearchResults(searchResults.data);
+      setIsModalOpen(true);
     } catch (error) {
       console.error(`Error searching for books: ${error.message}`)
     }
@@ -21,6 +22,7 @@ export default function Searchbar() {
   const handleSearch = (e) => {
     setText(e.target.value);
   };
+//            <button disabled onClick={() => alert('Please log in to search our collection')} className="button">
 
   return (
     <div className="searchbar" data-testid="Searchbar">

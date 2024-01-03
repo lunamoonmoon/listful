@@ -1,0 +1,27 @@
+.navbar-container {
+  background: var(--white);
+  border-bottom: 1px solid rgba(230, 230, 230, 0.688);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.listful-nav-logo {
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nav-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+}

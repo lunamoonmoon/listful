@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import About from "../About/About";
 import Searchbar from "../Searchbar/Searchbar";
+import "./NavBar.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavBar({ isLoggedIn }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,29 +35,17 @@ export default function NavBar({ isLoggedIn }) {
   // }, [modalType]);
 
   return (
-    <nav>
+    <nav className="navbar-container">
+      <div className="hamburger"><FontAwesomeIcon icon={faBars} /></div>
       <div className="logo">
-        <img className="listful-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"}/>
+        <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}/>
       </div>
-      <div className="buttons">
-        {isLoggedIn ? (
-          <>
-            <button>Catalog</button>
-            <Searchbar/>
-          </>
-        ) : (
-          <>
-            <button disabled onClick={() => alert('Please log in to see our collection')}>
-              Catalog
-            </button>
-            <button disabled onClick={() => alert('Please log in to search our collection')}>
-              <Searchbar/>
-            </button>
-          </>
-        )}
+      <div className="nav-icons">
+        <Searchbar isLoggedIn={isLoggedIn}/>
+        <button disabled onClick={() => alert('Please log in to see our collection')}>Catalog</button>
         <button onClick={handleAboutUsClick}>About Us</button>
         {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
-        <button onClick={handleSignUpLogInClick}>Sign Up/Log In</button>
+        <button onClick={handleSignUpLogInClick}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
       </div>
     </nav>
   );

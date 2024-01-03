@@ -7,13 +7,14 @@ import { useState } from 'react';
 
 function App() {
   let [modal, setModal] = useState(false);
+  let [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const openModal = () => setModal(true);
   const closeModal = () => setModal(false);
 
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar isLoggedIn={isLoggedIn}/>
       <Home/>
       { modal && <BookModal title="title" body="" /> }
       <Footer/>
