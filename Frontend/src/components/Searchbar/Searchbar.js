@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
-export default function Searchbar({isLoggedIn}) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function Searchbar() {
+  const [query, setQuery] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [text, setText] = useState('');
 
-  const handleSubmit = async (e) => {
+  //api call
+  const handleSearch = async (query) => {
+    console.log(query);
+    setSearchResults('')
+  };
+
+  const handleQuery = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const searchResults = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${text}`
-      );
-      setSearchResults(searchResults.data);
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error(`Error searching for books: ${error.message}`)
-    }
+    handleSearch(query);
+    setQuery('');
   };
-
-  const handleSearch = (e) => {
-    setText(e.target.value);
-  };
-//            <button disabled onClick={() => alert('Please log in to search our collection')} className="button">
 
   return (
     <div className="searchbar" data-testid="Searchbar">
       <form onSubmit={handleSubmit}>
-        <input placeholder="Search Here" value={text} onChange={handleSearch}/>
+        <input placeholder="Search Here" type="text" value={query} onChange={handleQuery}/>
         <button type="submit">Search</button>
       </form>
     </div>

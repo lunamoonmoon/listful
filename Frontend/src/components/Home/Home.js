@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Searchbar from '../Searchbar/Searchbar';
 import Book from '../Book/Book';
 
 export default function Home() {
   //get libraries from db
   const [libraries, setLibraries] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    axios.get('http://localhost:8001/libraries')
-      .then(response => {
-        setLibraries(response.data);
-      })
-      .catch(err => {
-        console.error(`Error fetching libraries: ${err}`);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('http://localhost:8001/libraries')
+  //     .then(response => {
+  //       setLibraries(response.data);
+  //     })
+  //     .catch(err => {
+  //       console.error(`Error fetching libraries: ${err}`);
+  //     });
+  // }, []);
 
   //map through db libraries displaying its books
   //we only want to map through the libraries IF someone is logged in - need to implement this functionality
@@ -32,6 +34,15 @@ export default function Home() {
           </li>
         </ul>
       ))};
+      {/* {openModal && (
+        <Modal setOpenModal={setOpenModal}></Modal>
+      )}
+      {/* {isModalOpen && (
+        <SearchResultModal
+          SearchResults={setSearchResults}
+          closeModal={() => setIsModalOpen(false)}
+        />
+      )} */}
     </div>
   )
 };

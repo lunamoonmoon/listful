@@ -4,26 +4,23 @@ import About from "../About/About";
 import Searchbar from "../Searchbar/Searchbar";
 import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavBar({ isLoggedIn }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = React.useState(null);
-  const [modalType, setModalType] = React.useState(null);
-
-  const handleAboutUsClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleSignUpLogInClick = () => {
+  // const [modalContent, setModalContent] = React.useState(null);
+  // const [modalType, setModalType] = React.useState(null);
+  
+  const handleClick = () => {
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setModalContent(null);
-    setModalType(null);
+    // setModalContent(null);
+    // setModalType(null);
     setIsModalOpen(false);
   };
+
 //for the modal, we need to pass in the modal content and the modal type - conditional rendering 
   // React.useEffect(() => {
   //   // Update modalContent based on the modalType
@@ -36,16 +33,15 @@ export default function NavBar({ isLoggedIn }) {
 
   return (
     <nav className="navbar-container">
-      <div className="hamburger"><FontAwesomeIcon icon={faBars} /></div>
       <div className="logo">
         <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}/>
       </div>
       <div className="nav-icons">
         <Searchbar isLoggedIn={isLoggedIn}/>
         <button disabled onClick={() => alert('Please log in to see our collection')}>Catalog</button>
-        <button onClick={handleAboutUsClick}>About Us</button>
+        <button onClick={handleClick}>About Us</button>
         {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
-        <button onClick={handleSignUpLogInClick}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
+        <button onClick={handleClick}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
       </div>
     </nav>
   );
