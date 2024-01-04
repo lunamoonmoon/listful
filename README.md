@@ -7,7 +7,7 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/lunamoonmoon/listful"><strong>Explore the our code! »</strong></a>
+    <a href="https://github.com/lunamoonmoon/listful"><strong>Explore our code! »</strong></a>
     <br />
 </div>
 

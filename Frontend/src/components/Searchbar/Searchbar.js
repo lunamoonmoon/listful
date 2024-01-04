@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 
-export default function Searchbar() {
+export default function Searchbar({ handleSearch }) {
   const [query, setQuery] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-
-  //api call
-  const handleSearch = async (query) => {
-    console.log(query);
-    setSearchResults('')
-  };
 
   const handleQuery = (e) => {
     setQuery(e.target.value);
