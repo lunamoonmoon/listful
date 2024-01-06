@@ -31,9 +31,13 @@ router.post("/library/create", (req, res) => {
 
     const values = [
       newLibraryObj.user_id, 
-      newLibraryObj.public_boolean, 
-      newLibraryObj.library_name
+      newLibraryObj.public, 
+      newLibraryObj.list_name
     ]
+
+    // USER_ID INT REFERENCES USERS(ID) ON DELETE CASCADE,
+    // LIST_NAME VARCHAR(255) NOT NULL,
+    // PUBLIC BOOLEAN NOT NULL
 
   //the below is based on Jeremy's midterm projecdt    
     return db.query(queryString, values)
