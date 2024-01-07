@@ -57,12 +57,12 @@ router.post("/library/create", (req, res) => {
 
 //GET BOOKS BY LIBRARY ID
 
-router.get("library/:id", (req, res)=> {
+router.get("lists/:id", (req, res)=> {
 
   //I think this will need to be changed to req.body
   const id = req.query.id;
 
-  const queryString = `SELECT * FROM books WHERE library_id = $1`;
+  const queryString = `SELECT * FROM books WHERE list_id = $1`;
 
   //generates list of books based on assigned library ID
   const loadLibrary = (id) => {
