@@ -1,28 +1,16 @@
 import React, { useState } from "react";
-import Modal from "../Modal/Modal";
+import BookModal from "../BookModal/BookModal";
 import About from "../About/About";
 import Searchbar from "../Searchbar/Searchbar";
+import { modalState, modalReducer } from "../../hooks/modalReducer";
 import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-export default function NavBar({ isLoggedIn, handleSearch }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [modalContent, setModalContent] = React.useState(null);
-  // const [modalType, setModalType] = React.useState(null);
-  
-  const handleClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    // setModalContent(null);
-    // setModalType(null);
-    setIsModalOpen(false);
-  };
-
-  const onSearch = () =>{
-
+export default function NavBar({ isLoggedIn, handleSearch, handleModal, show }) {
+  const handleAbout = () => {
+    <About/>;
+    handleModal();
   };
 
 //for the modal, we need to pass in the modal content and the modal type - conditional rendering 
@@ -43,9 +31,8 @@ export default function NavBar({ isLoggedIn, handleSearch }) {
       <div className="nav-icons">
         <Searchbar handleSearch={handleSearch} className='searchbar'/>
         <button disabled onClick={() => alert('Please log in to see our collection')}>Catalog</button>
-        <button onClick={handleClick}>About Us</button>
-        {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
-        <button onClick={handleClick}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
+        <button onClick={handleAbout}>About Us</button>
+        <button onClick={handleModal}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
       </div>
     </nav>
   );

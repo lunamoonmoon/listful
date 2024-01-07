@@ -2,17 +2,26 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home'
-import BookModal from './components/Modal/Modal';
 import { useState, useReducer } from 'react';
+import { modalState, modalReducer } from './hooks/modalReducer'
 import { initialState, searchReducer } from './hooks/searchReducer';
 import axios from 'axios';
 
 
 function App() {
-  let [modal, setModal] = useState(false);
+  const [showState, showDispatch] = useReducer(modalReducer, modalState);
+  const { show } = showState;
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   const [state, dispatch] = useReducer(searchReducer, initialState);
   const { searchResults } = state;
+
+  const handleModal = () => {
+    if (show === false) {
+      dispatch({ type: 'HANDLE_OPEN' })
+    } else {
+      dispatch({ type: 'HANDLE_CLOSE' })
+    };
+  };
 
   const handleSearch = async (query) => {
     try {
@@ -23,14 +32,10 @@ function App() {
     }
   };
 
-  const openModal = () => setModal(true);
-  const closeModal = () => setModal(false);
-
   return (
     <div className="App">
-      <NavBar isLoggedIn={isLoggedIn} handleSearch={handleSearch}/>
-      <Home searchResults={searchResults}/>
-      { modal && <BookModal title="title" body="" /> }
+      <NavBar isLoggedIn={isLoggedIn} handleSearch={handleSearch} handleModal={handleModal} show={show}/>
+      <Home searchResults={searchResults} show={show}/>
       <Footer/>
     </div>
   );

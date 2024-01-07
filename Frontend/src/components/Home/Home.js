@@ -1,7 +1,8 @@
 import Book from '../Book/Book';
+import About from '../About/About'
 import './Home.scss';
 
-export default function Home({ searchResults }) {
+export default function Home({ searchResults, show }) {
   //get libraries from db
   // const [libraries, setLibraries] = useState([]);
   // const [openModal, setOpenModal] = useState(false);
@@ -21,6 +22,7 @@ export default function Home({ searchResults }) {
   //we only want to map through the libraries IF someone is logged in - need to implement this functionality
   return (
     <div data-testid='Home'>
+      <About show={show}/>
       <div className='home-container'>
         <div className="logo">
           <img src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}/>
