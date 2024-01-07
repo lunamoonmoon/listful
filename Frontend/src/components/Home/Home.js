@@ -20,7 +20,9 @@ export default function Home({ searchResults }) {
   //we only want to map through the libraries IF someone is logged in - need to implement this functionality
   return (
     <div data-testid='Home'>
-      <img src={process.env.PUBLIC_URL + "/listful_logo.png"}></img>
+      <div className="logo">
+        <img src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}/>
+      </div>
       <Book searchResults={searchResults}/>
       <h1>Save all your favourite books in one spot</h1>
       <p>Organize your books, one list at a time with your Listful Library, a web app that collates your library in one easy location.</p>

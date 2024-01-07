@@ -38,10 +38,10 @@ export default function NavBar({ isLoggedIn, handleSearch }) {
   return (
     <nav className="navbar-container">
       <div className="logo">
-        <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}/>
+      <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"}></img>
       </div>
       <div className="nav-icons">
-        <Searchbar handleSearch={handleSearch}/>
+        <Searchbar handleSearch={handleSearch} className='searchbar'/>
         <button disabled onClick={() => alert('Please log in to see our collection')}>Catalog</button>
         <button onClick={handleClick}>About Us</button>
         {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
