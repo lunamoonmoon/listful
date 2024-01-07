@@ -1,0 +1,33 @@
+.navbar-container {
+  border-bottom: 1px solid rgba(230, 230, 230, 0.688);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding-inline-end: 1rem;
+
+  button {
+    border-radius: 8px;
+    border-width: 0;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .listful-nav-logo {
+    height: 56px;
+  }
+
+  .searchbar {
+    height: 56px;
+  }
+  
+  .nav-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+  }
+}

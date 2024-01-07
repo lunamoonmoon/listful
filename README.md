@@ -7,21 +7,17 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/lunamoonmoon/listful"><strong>Explore the our code! »</strong></a>
+    <a href="https://github.com/lunamoonmoon/listful"><strong>Explore our code! »</strong></a>
     <br />
 </div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
-  <ol>
-    <>
-      <a href="#about-the-project">About The Project</a>
-      <a href="#built-with">Built With</a>
-      <a href="#team-members">Team Members</a>
-      <a href="#Acknowledgments">Acknowledgments</a>
-    </>
-  </ol>
+    1. <a href="#about-the-project">About The Project</a>
+    1. <a href="#built-with">Built With</a>
+    1. <a href="#team-members">Team Members</a>
+    1. <a href="#Acknowledgments">Acknowledgments</a>
 </details>
 
 <!-- ABOUT THE PROJECT -->

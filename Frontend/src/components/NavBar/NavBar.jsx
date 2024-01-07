@@ -3,9 +3,11 @@ import Modal from "../BookModal/BookModal";
 import About from "../About/About";
 import SignUpLogIn from "../SignUpLogIn/SignUpLogIn";
 import Searchbar from "../Searchbar/Searchbar";
-import "./NavBar.scss"; 
+import "./NavBar.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-export default function NavBar({ isLoggedIn, openModal, setIsSignUp }) {
+export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch }) {
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -24,16 +26,20 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp }) {
     setIsModalOpen(false);
   };
 
+  const onSearch = () =>{
+
+  };
+
   return (
-    <nav>
+    <nav className="navbar-container">
       <div className="logo">
-        <img className="listful-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"} alt="Listful Logo" />
+        <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"} alt="Listful Logo" />
       </div>
-      <div className="buttons">
+      <div className="nav-icons">
         {isLoggedIn ? (
           <>
             <button>Catalog</button>
-            <Searchbar />
+            <Searchbar handleSearch={handleSearch} className='searchbar' />
           </>
         ) : (
           <>
@@ -46,7 +52,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp }) {
           </>
         )}
         <button onClick={handleAboutUsClick}>About Us</button>
-        <button onClick={handleSignUpLogInClick}>Sign Up/Log In</button>
+        <button onClick={handleSignUpLogInClick}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
       </div>
       {isModalOpen && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />

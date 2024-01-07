@@ -1,31 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import "./Searchbar.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-export default function Searchbar() {
-  const [text, setText] = useState('');
+export default function Searchbar({ handleSearch }) {
+  const [query, setQuery] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const searchResults = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${text}`
-      );
-      {
-        //display response
-      }
-    } catch (error) {
-      console.error(`Error searching for books: ${error.message}`)
-    }
+  const handleQuery = (e) => {
+    setQuery(e.target.value);
   };
 
-  const handleSearch = (e) => {
-    setText(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(query);
+    setQuery('');
   };
 
   return (
     <div className="searchbar" data-testid="Searchbar">
       <form onSubmit={handleSubmit}>
-        <input placeholder="Search Here" value={text} onChange={handleSearch}/>
+        <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
+        <input placeholder="      Find Your Book" type="search" name='search' value={query} onChange={handleQuery}/>
         <button type="submit">Search</button>
       </form>
     </div>
