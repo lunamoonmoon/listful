@@ -1,47 +1,20 @@
-import Button from 'react-bootstrap/button';
-import Modal from 'react-bootstrap/modal';
+import React from 'react';
+import { Modal as BootstrapModal, Button } from 'react-bootstrap';
 
-export default function BookModal(props) {
-  const { title, body } = props;
+export default function Modal({ title, body, closeModal }) {
   return (
-    <>
-      <div
-        className="modal show"
-        style={{ display: 'block', position: 'initial' }}
-      >
-        <Modal.Dialog>
-          <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <p>{body}</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="primary">Close</Button>
-          </Modal.Footer>
-        </Modal.Dialog>
-      </div>
-    </>
-  )
+    <BootstrapModal show={true} onHide={closeModal}>
+      <BootstrapModal.Header closeButton>
+        {/* <BootstrapModal.Title>{title}</BootstrapModal.Title> */}
+      </BootstrapModal.Header>
+      <BootstrapModal.Body>
+        <p>{body}</p>
+      </BootstrapModal.Body>
+      <BootstrapModal.Footer>
+        <Button variant="primary" onClick={closeModal}>
+          Close
+        </Button>
+      </BootstrapModal.Footer>
+    </BootstrapModal>
+  );
 }
-
-
-//views to render in modal instead of several modals - views and ejs files in Tinyapp but react does not use this. Read documentation for more
-//conditional rendering  - use state to monitor it
-//use state to monitor if modal is open or closed
-// when user clicks button, retrieve what the user clicked, and change the state to what thye clikcked on and contidional render to whatever you want in the modal 
-
-
-// function Modal({ children, closeModal }) {
-//   return (
-//     <div className="modal-overlay" onClick={closeModal}>
-//       <div className="modal-content" onClick={(event) => event.stopPropagation()}>
-//         <button className="close-button" onClick={closeModal}>
-//           X
-//         </button>
-//         {children}
-//       </div>
-//     </div>
-//   );

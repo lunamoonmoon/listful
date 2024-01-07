@@ -1,46 +1,39 @@
 import React, { useState } from "react";
-import Modal from "../Modal/Modal";
+import Modal from "../BookModal/BookModal";
 import About from "../About/About";
+import SignUpLogIn from "../SignUpLogIn/SignUpLogIn";
 import Searchbar from "../Searchbar/Searchbar";
+import "./NavBar.scss"; 
 
-export default function NavBar({ isLoggedIn }) {
+export default function NavBar({ isLoggedIn, openModal, setIsSignUp }) {
+  const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = React.useState(null);
-  const [modalType, setModalType] = React.useState(null);
 
   const handleAboutUsClick = () => {
-    setIsModalOpen(true);
+    setModalContent(<About />);
+    openModal(<About />);
   };
 
   const handleSignUpLogInClick = () => {
-    setIsModalOpen(true);
+    setModalContent(<SignUpLogIn setIsSignUp={setIsSignUp} />);
+    openModal(<SignUpLogIn setIsSignUp={setIsSignUp} />);
   };
 
   const closeModal = () => {
     setModalContent(null);
-    setModalType(null);
     setIsModalOpen(false);
   };
-//for the modal, we need to pass in the modal content and the modal type - conditional rendering 
-  // React.useEffect(() => {
-  //   // Update modalContent based on the modalType
-  //   if (modalType === "About") {
-  //     setModalContent(<About />);
-  //   } else if (modalType === "signUp") {
-  //     setModalContent(<SignUpLoginPage />);
-  //   }
-  // }, [modalType]);
 
   return (
     <nav>
       <div className="logo">
-        <img className="listful-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"}/>
+        <img className="listful-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"} alt="Listful Logo" />
       </div>
       <div className="buttons">
         {isLoggedIn ? (
           <>
             <button>Catalog</button>
-            <Searchbar/>
+            <Searchbar />
           </>
         ) : (
           <>
@@ -48,14 +41,16 @@ export default function NavBar({ isLoggedIn }) {
               Catalog
             </button>
             <button disabled onClick={() => alert('Please log in to search our collection')}>
-              <Searchbar/>
+              <Searchbar />
             </button>
           </>
         )}
         <button onClick={handleAboutUsClick}>About Us</button>
-        {isModalOpen && <Modal closeModal={closeModal}><About /></Modal>}
         <button onClick={handleSignUpLogInClick}>Sign Up/Log In</button>
       </div>
+      {isModalOpen && (
+        <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />
+      )}
     </nav>
   );
 }
