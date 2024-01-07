@@ -41,7 +41,8 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar isLoggedIn={false} openModal={openModal} handleSearch={handleSearch}/> //alt-> isLoggedIn={isLoggedIn}
+      <NavBar isLoggedIn={false} openModal={openModal} handleSearch={handleSearch}/> 
+      {/* alt-> isLoggedIn={isLoggedIn} */}
       {modalContent && isSignUp && (
         <SignUpLogIn closeModal={closeModal} setIsSignUp={setIsSignUp} />
       )}
@@ -52,8 +53,8 @@ function App() {
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />
       )} 
-      //<Home searchResults={searchResults}/>
-     //{ modal && <BookModal title="title" body="" /> }
+      {/* //<Home searchResults={searchResults}/>
+     //{ modal && <BookModal title="title" body="" /> } */}
       <Footer />
     </div>
   );
