@@ -55,6 +55,35 @@ router.post("/library/create", (req, res) => {
   
 })
 
+
+
+//GET ALL LISTS
+router.get("lists/:id", (req, res)=> {
+
+  //I think this will need to be changed to req.body
+  const id = req.query.id;
+
+  const queryString = `SELECT * FROM lists`;
+
+  //generates list of books based on assigned library ID
+  const loadAllLists = () => {
+    return db.query(queryString)
+    .then(({ rows }) => {
+      console.log(rows);
+      res.json(rows);
+      // return data.rows[0]
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    });
+
+  }
+
+  loadAllLists()
+
+})
+
 //GET BOOKS BY LIBRARY ID
 
 router.get("lists/:id", (req, res)=> {
@@ -65,7 +94,7 @@ router.get("lists/:id", (req, res)=> {
   const queryString = `SELECT * FROM books WHERE list_id = $1`;
 
   //generates list of books based on assigned library ID
-  const loadLibrary = (id) => {
+  const loadList = (id) => {
     return db.query(queryString, [id])
     .then(({ rows }) => {
       console.log(rows);
@@ -79,9 +108,13 @@ router.get("lists/:id", (req, res)=> {
 
   }
 
-  loadLibrary(id)
+  loadList(id)
 
 })
+
+
+
+//add book to library
 
 // const getBookByTitle = (name) => {
 //   const queryString = `SELECT * FROM books WHERE name =$1`
