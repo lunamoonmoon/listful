@@ -97,7 +97,18 @@ router.post("/books/insert", (req, res) => {
     newBookObject.ownership
    ]
 
-   return db.query(queryString, values)
+   db.query(queryString, values)
+   .then(() => {
+     console.log('Book inserted successfully');
+     res.json({ success: true });
+   })
+   .catch(error => {
+     console.error(error);
+     res.status(500).json({ success: false, error: "Internal server error" });
+   });
+};
+
+insertNewBook(newBookObject);
 
 
 
