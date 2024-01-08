@@ -1,3 +1,4 @@
+const express = require("express");
 const router = require("express").Router();
 const { query } = require("express");
 const db = require("../database/index.js");
@@ -84,17 +85,22 @@ router.get("/books", (req, res) => {
 
 router.post("/books/insert", (req, res) => {
 
+  //set to req.query for testing, but probalby needs to be req.body 
+  const newBookObject = req.query //unclear if this should be req.query or req.body
+  console.log("request object", req)
+  console.log("req query", req.query)
+
   const insertNewBook = (newBookObject) => {
-  const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
+  const queryString = `INSERT INTO books (LIST_ID, name, author, rating, notes, ownership)
    VALUES ($1, $2, $3, $4, $5, $6)`;
 
    const values = [
-    newBookObject.library_id,
-    newBookObject.name,
-    newBookObject, author,
-    newBookObject.rating,
-    newBookObject.notes,
-    newBookObject.ownership
+    newBookObject.LIST_ID,
+    newBookObject.NAME,
+    newBookObject.AUTHOR,
+    newBookObject.RATING,
+    newBookObject.NOTES,
+    newBookObject.OWNERSHIP
    ]
 
    db.query(queryString, values)
@@ -109,11 +115,7 @@ router.post("/books/insert", (req, res) => {
 };
 
 insertNewBook(newBookObject);
-
-
-
-}
-})
+});
 
 
 //     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
