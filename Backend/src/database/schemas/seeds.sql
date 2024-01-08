@@ -1,4 +1,4 @@
-TRUNCATE TABLE GENRE_BOOKS, BOOKS, LIBRARIES, USERS, GENRES;
+TRUNCATE TABLE GENRE_BOOKS, BOOKS, LISTS, USERS, GENRES;
 
 INSERT INTO USERS (ID, USERNAME, PASSWORD, EMAIL)
 VALUES 
@@ -6,17 +6,17 @@ VALUES
   (2, 'celestestar', 'astronomy', 'stargazer@gmail.com'),
   (3, 'kkslider', 'singingtime', 'kkslider@gmail.com');
 
-INSERT INTO LIBRARIES (USER_ID, NAME, PUBLIC)
+INSERT INTO LISTS (USER_ID, LIST_NAME, PUBLIC)
 VALUES 
   (1, 'Fav Books', true),
   (1, 'Comics to Read', true),
   (2, 'Classics', true);
 
-INSERT INTO BOOKS (LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
+INSERT INTO BOOKS (LIST_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
 VALUES 
-  (1, '1984', 'George Orwell', 5, 'So good!', true),
-  (1, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
-  (2, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
+  (16, '1984', 'George Orwell', 5, 'So good!', true),
+  (17, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
+  (17, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
 
 INSERT INTO GENRES (NAME)
 VALUES 
