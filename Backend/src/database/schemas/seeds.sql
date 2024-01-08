@@ -14,9 +14,9 @@ VALUES
 
 INSERT INTO BOOKS (LIST_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
 VALUES 
-  (16, '1984', 'George Orwell', 5, 'So good!', true),
-  (17, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
-  (17, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
+  (1, '1984', 'George Orwell', 5, 'So good!', true),
+  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
+  (2, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
 
 INSERT INTO GENRES (NAME)
 VALUES 
