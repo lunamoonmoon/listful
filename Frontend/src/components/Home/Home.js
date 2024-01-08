@@ -1,8 +1,12 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Book from '../Book/Book';
+import SignUpLogIn from '../SignUpLogIn/SignUpLogIn';
 import About from '../About/About'
 import './Home.scss';
 
-export default function Home({ searchResults, show }) {
+export default function Home({ openModal, searchResults, show }) {
+
   //get libraries from db
   // const [libraries, setLibraries] = useState([]);
   // const [openModal, setOpenModal] = useState(false);
@@ -18,20 +22,23 @@ export default function Home({ searchResults, show }) {
   // }, []);
 
 
-  //map through db libraries displaying its books
-  //we only want to map through the libraries IF someone is logged in - need to implement this functionality
+
+  const handleSignUpNowClick = () => {
+    openModal(<SignUpLogIn closeModal={() => openModal(null)} />);
+  };
+//only want to render the library once the user is logged in. Instead, render the catalog comoonent once the user is logged in.
   return (
     <div data-testid='Home'>
       <About show={show}/>
       <div className='home-container'>
         <div className="logo">
-          <img src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}/>
+          <img src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}alt="Listful Logo" />
         </div>
         {/* <Book searchResults={searchResults}/> */}
         <div className='home-hero'>
         <h1 className='heading'>Save all your favourite books in one spot</h1>
         <p>Organize your books, one list at a time with your Listful Library, a web app that collates your library in one easy location.</p>
-        <button>Sign Up Now</button>
+        <button onClick={handleSignUpNowClick}>Sign Up Now</button>
         </div>
         {/* {libraries.map((library) => (
           <ul key={library.id}>
@@ -51,5 +58,5 @@ export default function Home({ searchResults, show }) {
         )} */}
       </div>
     </div>
-  )
+  );
 };
