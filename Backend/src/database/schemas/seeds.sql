@@ -1,4 +1,7 @@
-TRUNCATE TABLE GENRE_BOOKS, BOOKS, LISTS, USERS, GENRES;
+TRUNCATE TABLE GENRE_BOOKS, BOOKS CASCADE;
+TRUNCATE TABLE LISTS CASCADE;
+TRUNCATE TABLE USERS CASCADE;
+TRUNCATE TABLE GENRES CASCADE;
 
 INSERT INTO USERS (ID, USERNAME, PASSWORD, EMAIL)
 VALUES 
@@ -12,11 +15,11 @@ VALUES
   (1, 'Comics to Read', true),
   (2, 'Classics', true);
 
-INSERT INTO BOOKS (LIST_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
+INSERT INTO BOOKS (NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
 VALUES 
-  (1, '1984', 'George Orwell', 5, 'So good!', true),
-  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
-  (2, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
+  ('1984', 'George Orwell', 5, 'So good!', true),
+  ('Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
+  ('Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
 
 INSERT INTO GENRES (NAME)
 VALUES 
