@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BookModal from "../BookBookModal/BookBookModal";
+import Modal from "../Modal/Modal";
 import About from "../About/About";
 import SignUpLogIn from "../SignUpLogIn/SignUpLogIn";
 import Searchbar from "../Searchbar/Searchbar";
