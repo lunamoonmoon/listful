@@ -19,7 +19,9 @@ function App() {
   const handleSearch = async (query) => {
     try {
       const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-      dispatch({ type: 'SET_SEARCH_RESULTS', payload: response.data });
+      dispatch({ type: 'SET_SEARCH_RESULTS', payload: response.data.items });
+      console.log(response.data.items);
+      console.log(searchResults);
     } catch (error) {
       console.error(`Error searching for books: ${error.message}`);
     }
@@ -37,7 +39,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar isLoggedIn={false} openModal={openModal} handleSearch={handleSearch}/>
+      <NavBar isLoggedIn={true} openModal={openModal} handleSearch={handleSearch}/>
       <Home openModal={openModal} searchResults={searchResults} />
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />

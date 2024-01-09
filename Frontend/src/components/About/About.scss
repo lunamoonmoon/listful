@@ -13,5 +13,11 @@
 
   .about-text {
     font-family: 'Poppins', sans-serif;
+
+    img {
+      width: 3rem;
+      height: 3rem;
+      object-fit: scale-down;
+    }
   }
 }
