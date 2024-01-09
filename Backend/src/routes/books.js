@@ -6,7 +6,7 @@ router.use(express.json());
 
 //GET ROUTES
 
-router.get("/books", (req, res) => {
+router.get("/", (req, res) => {
 
     //A get request to retreive information about books from a database
     //Table BOOKS (ID, LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
@@ -31,7 +31,7 @@ router.get("/books", (req, res) => {
 //possible make it a general object pass to the param
 
 //   //with assistance from lary AI bot
-  router.get("/books/author", (req, res) => {
+  router.get("/author", (req, res) => {
     const authorName = req.query.author
     // const authorName = req.body.author; // Get the author's name from the query string
     //const authorName = 'Joseph Heller' // this line for testing only, comment out and uncomment out above line
@@ -58,7 +58,7 @@ router.get("/books", (req, res) => {
   
   //name is the title of the book
   //tested manually and with postman - Jeremy
-  router.get("/books/name", (req, res) => {
+  router.get("/name", (req, res) => {
     const name = req.query.name
     // const name = "Twilight"
 
@@ -83,8 +83,8 @@ router.get("/books", (req, res) => {
 
   //POST ROUTES
 
-  //Tested with postman Jan 8th, and working
-router.post("/books/insert", (req, res) => {
+  //Tested with postman Jan 8th, and working (need to re-test as we altered the server.js file)
+router.post("/insert", (req, res) => {
 
   //set to req.query for testing, but probalby needs to be req.body 
   const newBookObject = req.query //unclear if this should be req.query or req.body
@@ -103,8 +103,7 @@ router.post("/books/insert", (req, res) => {
     newBookObject.BOOK_COVER_LINK,
     newBookObject.NOTES
 
-    
-    
+
    ]
 
    db.query(queryString, values)

@@ -31,3 +31,5 @@ router.get("login/:id", (req, res)=> {
   login(id)
 
 })
+
+module.exports = router

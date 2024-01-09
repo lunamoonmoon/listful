@@ -1,13 +1,14 @@
+const express = require("express");
 const router = require("express").Router();
 const { query } = require("express");
 const db = require("../database/index.js");
-router.use(express.json());
+router.use(express.json()); 
 
 
 //RETRIEVE ACCOUNT INFO (GET)
 
 //get specific user info
-route.get("/user/:id", (req, res) => {
+router.get("/:id", (req, res) => {
 
   const user = req.query.id;
 
@@ -55,4 +56,5 @@ route.get("/user/:id", (req, res) => {
 // getBookByAuthor(authorName);
 // });
 
+module.exports = router
 
