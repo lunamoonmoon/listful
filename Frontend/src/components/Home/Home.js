@@ -30,7 +30,7 @@ export default function Home({ openModal, searchResults, show }) {
     <div data-testid='Home'>
       <div className='home-container'>
         <div className="logo">
-          <img src={process.env.PUBLIC_URL + "/listful_logo_graphic.png"}alt="Listful Logo" />
+          <img src={process.env.PUBLIC_URL + "/listful_logo_transparent_graphic.png"}alt="Listful Logo" />
         </div>
         <div className='home-hero'>
         <h1 className='heading'>Save all your favourite books in one spot</h1>
