@@ -50,7 +50,7 @@ router.post("/add_book", (req, res)=> {
 
 })
 
-//untested
+//untested///testing in progress...Jan 9th
 //note, because I have added lists in the lists router, WE DO NOT NEED TO PREFIX IT, it's already there 
 router.post("/create", (req, res) => {
 
@@ -59,19 +59,20 @@ router.post("/create", (req, res) => {
 
     user_id: req.body.user_id,
     list_name: req.body.list_name,
-    public_boolean: req.body.public_boolean
+    public: req.body.public
 
   }
   const createList = (newListObj) => {
 
-    const queryString = `INSERT INTO libraries (user_id, public_boolean, list_name)
+    const queryString = `INSERT INTO lists (user_id, list_name, public)
     VALUES ($1, $2, $3)
     RETURNING *`;
 
     const values = [
       newListObj.user_id,
-      newListObj.public_boolean,
-      newListObj.list_name
+      newListObj.list_name,
+      newListObj.public,
+      
     ];
   
     db.query(queryString, values)
@@ -120,8 +121,8 @@ router.get("/lists", (req, res) => {
 
 });
 
-//GET BOOKS BY LIBRARY ID
-
+//GET BOOKS BY LISTS ID
+//UNTESTED
 router.get("/lists/:id", (req, res) => {
 
   //I think this will need to be changed to req.body
