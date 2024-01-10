@@ -7,20 +7,23 @@ router.use(express.json());
 
 // As a user, I want to easily categorize items/lists in my library
 // As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc. 
-// Adding items (logged in): 
-// As a user, I want to add items to my library, noting whether I own them, want to own them, or plan to read (wishlist)
-// As a user, I want to be able to provide additional details for each item
-// As a user, I want to be able to click an item to get more information (modal)
-// Can move items between lists (stretch)
 
 
 //ADD BOOK TO LIST ROUTE (INDIA NEED THIS)
-
+//Jan 9th. Tested query using pre-defined values, coulnd't get postman to work when I submitted values, but used postman to trigger route...unsure what I am doing wrong
 router.post("/add_book", (req, res)=> {
   console.log("Route /lists/add_book was hit");
+  console.log("req body book_id: ", req.body.book_id)
+  console.log("req body list_id: ", req.body.list_id)
+  console.log("req body:", req.body)
 
   const book_id = req.body.book_id;
   const list_id = req.body.list_id
+
+  //QUERY WORKS WHEN I HARD CODE THE VALUES
+  // const book_id = 1;
+  // const list_id = 1;
+
  
   const addBookToList = (book_id, list_id) => {
     const queryString = `INSERT INTO BOOKS_LISTS (BOOK_ID, LIST_ID)
@@ -33,7 +36,7 @@ router.post("/add_book", (req, res)=> {
   
     db.query(queryString, values)
     .then(() => {
-      console.log('Book added to list successfully');
+      console.log('Book added to table successfully');
       res.json({ success: true });
     })
     .catch(error => {
@@ -52,48 +55,39 @@ router.post("/add_book", (req, res)=> {
 router.post("/create", (req, res) => {
 
   //you would be choosing to pack in as a object for transfer. It is not coming as an object
-  const newLibraryObj = {
+  const newListObj = {
 
-    user_id: req.query.user_id,
-    library_name: req.query.library_name,
-    public_boolean: req.query.public_boolean
-    
+    user_id: req.body.user_id,
+    list_name: req.body.list_name,
+    public_boolean: req.body.public_boolean
 
-    // user_id: req.body.user_id,
-    // public_boolean: req.body.public_boolean,
-    // library_name: req.body.library_name
-
-  };
-
-  const createLibrary = (newLibraryObj) => {
+  }
+  const createList = (newListObj) => {
 
     const queryString = `INSERT INTO libraries (user_id, public_boolean, list_name)
     VALUES ($1, $2, $3)
     RETURNING *`;
 
     const values = [
-      newLibraryObj.user_id,
-      newLibraryObj.public_boolean,
-      newLibraryObj.list_name
+      newListObj.user_id,
+      newListObj.public_boolean,
+      newListObj.list_name
     ];
-
-    // USER_ID INT REFERENCES USERS(ID) ON DELETE CASCADE,
-    // LIST_NAME VARCHAR(255) NOT NULL,
-    // PUBLIC BOOLEAN NOT NULL
-
-    //the below is based on Jeremy's midterm project    
-    return db.query(queryString, values)
-      .then((data) => {
-        return data.rows[0];
-      })
-      .catch((err) => {
-        console.log("create map library error message: ", err);
-      });
+  
+    db.query(queryString, values)
+    .then(() => {
+      console.log('New list created');
+      res.json({ success: true });
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ success: false, error: "Internal server error" });
+    });
 
 
   };
 
-  createLibrary(newLibraryObj);
+  createList(newListObj);
 
 });
 
@@ -153,6 +147,37 @@ router.get("/lists/:id", (req, res) => {
   loadList(id);
 
 });
+
+//FILTER LIBRARY BY....
+
+//Author
+//untested route
+router.get("/author", (req, res) =>{
+  const authorName = req.query.author
+  const library_id = req.query.library_id
+
+  const filterListByAuthor = (authorName, library_id) => {
+
+    values = [
+      authorName, 
+      library_id
+    ]
+
+    const queryString = `SELECT * FROM books WHERE author =$1 AND list_id =$2`
+    
+    db.query(queryString, values)
+    .then(({ rows }) => {
+      console.log(rows);
+      res.json(rows);
+      // return data.rows[0]
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    });
+
+  }
+})
 
 
 
