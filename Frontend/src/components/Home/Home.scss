@@ -35,5 +35,11 @@
 
   .logo {
     width: 50%;
+
+    img {
+      width: 44rem;
+      height: 38rem;
+      object-fit: scale-down;
+    }
   }
 }

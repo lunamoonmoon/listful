@@ -3,7 +3,7 @@ import Modal from "../Modal/Modal";
 import About from "../About/About";
 import SignUpLogIn from "../SignUpLogIn/SignUpLogIn";
 import Searchbar from "../Searchbar/Searchbar";
-import { modalState, modalReducer } from "../../hooks/modalReducer";
+import Catalogue from "../Catalogue/Catalogue";
 import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -22,13 +22,14 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
     openModal(<SignUpLogIn setIsSignUp={setIsSignUp} />);
   };
 
+  const handleCatalogueClick = () => {
+    setModalContent(<Catalogue />);
+    openModal(<Catalogue />);
+  };
+
   const closeModal = () => {
     setModalContent(null);
     setIsModalOpen(false);
-  };
-
-  const onSearch = () =>{
-
   };
 
   return (
@@ -39,7 +40,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
       <div className="nav-icons">
         {isLoggedIn ? (
           <>
-            <button>Catalog</button>
+            <button onClick={handleCatalogueClick}>Catalog</button>
             <Searchbar handleSearch={handleSearch} className='searchbar' />
           </>
         ) : (
@@ -48,7 +49,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
               Catalog
             </button>
             <button disabled onClick={() => alert('Please log in to search our collection')}>
-              <Searchbar />
+              <Searchbar handleSearch={handleSearch} className='searchbar'/>
             </button>
           </>
         )}
