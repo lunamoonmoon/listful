@@ -4,12 +4,13 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "googleapis": "^129.0.0",
+    "nodemon": "^3.0.2",
     "pg": "^8.11.3",
     "postgres": "^3.4.3"
   },
   "scripts": {
     "build": "npx",
-    "start": "npx node server.js",
+    "start": "npx nodemon server.js",
     "test": "jest",
     "reset": "psql -U development -d listful < ./src/database/schemas/create.sql && psql -U development -d listful < ./src/database/schemas/development.sql"
   },
@@ -19,6 +20,10 @@
       "^.+\\.js$": "babel-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js$",
-    "moduleFileExtensions": ["js", "json", "node"]
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ]
   }
 }

@@ -28,20 +28,22 @@ router.get("/", (req, res) => {
 
 });
 
-//books by user///
-//HOLD UP, WE DON'T HAVE BOOKS ASSOCIATED WITH A SPECIFIC USER IN THE TABLES
 
-router.get("/user/:id", (req, res) => {
 
-  
-  //I think this will need to be changed to req.body?
+// //GET BOOKS BY USER ID
+router.get("/users", (req, res) => {
+
   console.log("id: ", req.query.id)
   const id = req.query.id;
   // const id = req.params.id
   const getBooksByUser = (id) => {
 
     values = [id];
-    const queryString = `SELECT * FROM books WHERE id = $1`;
+
+    const queryString = `SELECT BOOKS.* FROM USERS 
+    JOIN LIBRARIES ON USERS.ID = LIBRARIES.user_id
+    JOIN BOOKS ON LIBRARIES.ID = BOOKS.library_id
+    WHERE USERS.id = $1`;
 
     db.query(queryString, values)
       .then(({ rows }) => {
@@ -89,6 +91,7 @@ router.get("/author", (req, res) => {
 
   getBookByAuthor(authorName);
 });
+
 
 //name is the title of the book
 //tested manually and with postman - Jeremy
