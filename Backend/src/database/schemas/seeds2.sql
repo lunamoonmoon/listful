@@ -9,7 +9,7 @@ VALUES
   (2, 'celestestar', 'astronomy', 'stargazer@gmail.com'),
   (3, 'kkslider', 'singingtime', 'kkslider@gmail.com');
 
-INSERT INTO LIBRARIES (USER_ID, LIST_NAME, PUBLIC)
+INSERT INTO LIBRARIES (USER_ID, LIBRARY_NAME, PUBLIC)
 VALUES 
   (1, 'Fav Books', true),
   (1, 'Comics to Read', true),

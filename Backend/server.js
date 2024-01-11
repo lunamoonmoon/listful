@@ -4,8 +4,8 @@ const PORT = process.env.PORT || 8001
 const { searchBooks } = require('./src/routes/searchBooks.js');
 
 const booksRouter = require("./src/routes/books.js")
-const listsRouter = require('./src/routes/lists');
-const usersRouter = require('./src/routes/users');
+const librariesRouter = require('./src/routes/libraries.js');
+const usersRouter = require('./src/routes/users.js');
 
 // const { searchBooks } = require('./googleBooksApi'); // Adjust the path accordingly
 
@@ -13,7 +13,7 @@ const usersRouter = require('./src/routes/users');
 require('dotenv').config();
 
 app.use('/books', booksRouter);
-app.use('/lists', listsRouter);
+app.use('/libraries', librariesRouter);
 app.use('/users', usersRouter);
 
 // app.get('/search-books', async (req, res) => {

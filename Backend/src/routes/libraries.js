@@ -11,6 +11,7 @@ router.use(express.json());
 
 //ADD BOOK TO LIST ROUTE (INDIA NEED THIS)
 //Jan 9th. Tested query using pre-defined values, coulnd't get postman to work when I submitted values, but used postman to trigger route...unsure what I am doing wrong
+//untested since revisions to route, need to refactor!!!
 router.post("/add_book", (req, res)=> {
   console.log("Route /lists/add_book was hit");
   console.log("req body book_id: ", req.body.book_id)
@@ -50,34 +51,38 @@ router.post("/add_book", (req, res)=> {
 
 })
 
-//untested///testing in progress...Jan 9th
-//note, because I have added lists in the lists router, WE DO NOT NEED TO PREFIX IT, it's already there 
+//CREATE LIBRARY
+//Tested sucessfully Jan 10th
+//note, because I have added libraries in the libraries router, WE DO NOT NEED TO PREFIX IT, it's already there 
 router.post("/create", (req, res) => {
 
+  console.log("req body", req.body)
+
   //you would be choosing to pack in as a object for transfer. It is not coming as an object
-  const newListObj = {
+  const newLibObj = {
 
     user_id: req.body.user_id,
-    list_name: req.body.list_name,
+    library_name: req.body.library_name,
     public: req.body.public
 
   }
-  const createList = (newListObj) => {
 
-    const queryString = `INSERT INTO lists (user_id, list_name, public)
+  const createLib = (newLibObj) => {
+
+    const queryString = `INSERT INTO libraries (user_id, library_name, public)
     VALUES ($1, $2, $3)
     RETURNING *`;
 
     const values = [
-      newListObj.user_id,
-      newListObj.list_name,
-      newListObj.public,
+      newLibObj.user_id,
+      newLibObj.library_name,
+      newLibObj.public,
       
     ];
   
     db.query(queryString, values)
     .then(() => {
-      console.log('New list created');
+      console.log('New library created');
       res.json({ success: true });
     })
     .catch(error => {
@@ -88,9 +93,49 @@ router.post("/create", (req, res) => {
 
   };
 
-  createList(newListObj);
+  createLib(newLibObj);
 
 });
+
+
+//FILTER LIBRARY BY AUTHOR (As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc. )
+
+router.get("/author", (req, res) => {
+  const authorName = req.query.author;
+  const library_id = req.query.library_id
+  // const authorName = req.body.author; // Get the author's name from the query string
+  //const authorName = 'Joseph Heller' // this line for testing only, comment out and uncomment out above line
+
+  const filterLibraryByAuthor = (authorName, library_id) => {
+
+
+    const queryString = `SELECT * FROM books, libraries
+     WHERE books.library_id = libraries.id
+      AND books.author = $1
+      AND libraries.id = $2;`
+
+    values = [
+      authorName, 
+      library_id]
+
+    //logs for testing purposes, delete for production
+    console.log('QueryString:', queryString);
+    console.log('AuthorName:', authorName);
+    console.log('getBooksByAuthorName triggering');
+    return db.query(queryString, [values]) // Pass author as a parameter to the query
+      .then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+      });
+  };
+
+  filterLibraryByAuthor(authorName, library_id);
+});
+
 
 
 
