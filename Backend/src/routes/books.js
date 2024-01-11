@@ -132,7 +132,8 @@ router.get("/name", (req, res) => {
 
 //POST ROUTES
 
-//Tested with postman Jan 8th, and working (need to re-test as we altered the server.js file)
+//Insert book into library (note this will insert a NEW book entirely...we will need a differnet query to add an existing book in teh books table to a library)
+
 router.post("/insert", (req, res) => {
 
   //set to req.query for testing, but probalby needs to be req.body 
@@ -141,10 +142,13 @@ router.post("/insert", (req, res) => {
   console.log("req query", req.query);
 
   const insertNewBook = (newBookObject) => {
-    const queryString = `INSERT INTO books (name, author, rating, ownership, book_cover_link, notes)
-   VALUES ($1, $2, $3, $4, $5, $6)`;
+    const queryString = `INSERT INTO books (library_id, name, author, rating, ownership, book_cover_link, notes)
+   VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+
+   
 
     const values = [
+      newBookObject.LIBRARY_ID,
       newBookObject.NAME,
       newBookObject.AUTHOR,
       newBookObject.RATING,
@@ -168,6 +172,81 @@ router.post("/insert", (req, res) => {
 
   insertNewBook(newBookObject);
 });
+
+
+//ASSIGN BOOK TO LIBRARY (requires you to already have the book_id
+//not yet tested
+router.post("/assign_library", (req, res) => {
+  console.log("req body", req.body)
+
+  const library_id = req.body.library_id;
+  const book_id = req.body.book_id;
+
+  const assignBook = (library_id, book_id) => {
+
+    const queryString = `UPDATE books 
+    SET library_id = $1
+    WHERE book_id = $2;`
+
+    const values = [
+      book_id, 
+      library_id
+    ]
+
+    db.query(queryString, values)
+    .then(() => {
+      console.log('Book assigned library successfully');
+      res.json({ success: true });
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ success: false, error: "Internal server error" });
+    });
+
+  }
+
+  assignBook(library_id, book_id)
+
+})
+
+
+//INSERT NEW BOOK INTO BOOKS TABLE
+//Tested with postman Jan 8th, and working (need to re-test as we altered the server.js file)
+// router.post("/insert", (req, res) => {
+
+//   //set to req.query for testing, but probalby needs to be req.body 
+//   const newBookObject = req.query; //unclear if this should be req.query or req.body
+//   console.log("request object", req);
+//   console.log("req query", req.query);
+
+//   const insertNewBook = (newBookObject) => {
+//     const queryString = `INSERT INTO books (name, author, rating, ownership, book_cover_link, notes)
+//    VALUES ($1, $2, $3, $4, $5, $6)`;
+
+//     const values = [
+//       newBookObject.NAME,
+//       newBookObject.AUTHOR,
+//       newBookObject.RATING,
+//       newBookObject.OWNERSHIP,
+//       newBookObject.BOOK_COVER_LINK,
+//       newBookObject.NOTES
+
+
+//     ];
+
+//     db.query(queryString, values)
+//       .then(() => {
+//         console.log('Book inserted successfully');
+//         res.json({ success: true });
+//       })
+//       .catch(error => {
+//         console.error(error);
+//         res.status(500).json({ success: false, error: "Internal server error" });
+//       });
+//   };
+
+//   insertNewBook(newBookObject);
+// });
 
 
 

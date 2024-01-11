@@ -15,11 +15,11 @@ VALUES
   (1, 'Comics to Read', true),
   (2, 'Classics', true);
 
-INSERT INTO BOOKS (LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
+INSERT INTO BOOKS (LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, BOOK_COVER_LINK, OWNERSHIP)
 VALUES 
-  (2, '1984', 'George Orwell', 5, 'So good!', true),
-  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
-  (1, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
+  (2, '1984', 'George Orwell', 5, 'So good!', 'http://tinyurl.com/43w7vyrf',true),
+  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', 'http://tinyurl.com/43w7vyrf', true),
+  (1, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', 'http://tinyurl.com/43w7vyrf',false);
 
 INSERT INTO GENRES (NAME)
 VALUES 

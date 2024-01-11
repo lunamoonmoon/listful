@@ -24,6 +24,8 @@ As a user, I want to be able to filter the library by author/subject/alphabetica
 Adding items (logged in): 
 
 As a user, I want to add items to my library, noting whether I own them, want to own them, or plan to read (wishlist)
+
+
 As a user, I want to be able to provide additional details for each item
 As a user, I want to be able to click an item to get more information (modal)
 Can move items between lists (stretch)
