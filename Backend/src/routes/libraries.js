@@ -135,6 +135,114 @@ router.get("/author", (req, res) => {
   filterLibraryByAuthor(authorName, library_id);
 });
 
+//FILTER LIBRARY BY RATING (note from user story, we don't have subject or favourited in the books table)
+//but we do have rating
+//) (As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc. )
+//tested and working Jan 10th
+router.get("/rating", (req, res) => {
+  const rating = req.query.rating
+  const library_id = req.query.library_id
+  
+  const filterLibraryByRating = (rating, library_id) => {
+
+
+    const queryString = `SELECT * FROM books
+    JOIN libraries ON books.library_id = libraries.id
+    WHERE books.rating = $1 AND libraries.id = $2;`
+
+    values = [
+      rating, 
+      library_id]
+
+    console.log([values])
+
+    //logs for testing purposes, delete for production
+    console.log('rating:', rating);
+    console.log("library id", library_id)
+    console.log('getBooksByRating triggering');
+    return db.query(queryString, values) // Pass author as a parameter to the query
+      .then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+      });
+  };
+
+  filterLibraryByRating(rating, library_id);
+});
+
+
+//FILTER LIBRARY BY ANY PARAMETER
+//"As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc. 
+router.get("/filter", (req, res) => {
+
+  //add any additional parameters here
+  const library_id = req.query.library_id
+  const authorName = req.query.author
+  const rating = req.query.rating
+  const name = req.query.name
+  const ownership = req.query.ownership
+
+  //be sure to update the argumetns if you add any params
+  //be sure to ALSO UPDATE THE ARGUEMENTS IN THE FUNCTION CALL AT THE BOTTOM OF THE ROUTE!
+  const filterLibrary = (rating, library_id, authorName, name, ownership) => {
+
+    console.log("query params: ", req.query)
+    let queryString = 'SELECT * FROM books JOIN libraries ON books.library_id = libraries.id WHERE libraries.id = $1 '
+
+    //optional parameters pushed to array if present, see below
+    values = [library_id]
+
+    //conditional parameter handling
+    //note, library_id is mandatory, not optional ergo there is not if statement for it
+    if(authorName){
+      queryString += 'AND books.author = $2 '
+      values.push(authorName)
+    }
+
+    if(rating){
+      queryString += 'AND books.rating = $3 '
+      values.push(rating)
+    }
+
+    if(name){
+      queryString += 'AND books.name = $4 '
+      values.push(name)
+    }
+
+    if(ownership){
+      queryString += 'AND books.name = $5 '
+      values.push(ownership)
+    }
+
+    console.log([values])
+
+    //logs for testing purposes, delete for production
+    console.log('rating:', rating);
+    console.log("library id", library_id)
+    console.log('getBooksByRating triggering');
+    console.log('QUERY STRING', queryString)
+    return db.query(queryString, values) // Pass author as a parameter to the query
+      .then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+      });
+  };
+
+  filterLibrary(rating, library_id, authorName, name, ownership);
+});
+
+
+
+
+
 
 
 
