@@ -99,30 +99,29 @@ router.post("/create", (req, res) => {
 
 
 //FILTER LIBRARY BY AUTHOR (As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc. )
-
+//tested and working Jan 10th
 router.get("/author", (req, res) => {
   const authorName = req.query.author;
   const library_id = req.query.library_id
-  // const authorName = req.body.author; // Get the author's name from the query string
-  //const authorName = 'Joseph Heller' // this line for testing only, comment out and uncomment out above line
-
+  
   const filterLibraryByAuthor = (authorName, library_id) => {
 
 
-    const queryString = `SELECT * FROM books, libraries
-     WHERE books.library_id = libraries.id
-      AND books.author = $1
-      AND libraries.id = $2;`
+    const queryString = `SELECT * FROM books
+    JOIN libraries ON books.library_id = libraries.id
+    WHERE books.author = $1 AND libraries.id = $2;`
 
     values = [
       authorName, 
       library_id]
 
+    console.log([values])
+
     //logs for testing purposes, delete for production
-    console.log('QueryString:', queryString);
     console.log('AuthorName:', authorName);
+    console.log("library id", library_id)
     console.log('getBooksByAuthorName triggering');
-    return db.query(queryString, [values]) // Pass author as a parameter to the query
+    return db.query(queryString, values) // Pass author as a parameter to the query
       .then(({ rows }) => {
         console.log(rows);
         res.json(rows);
