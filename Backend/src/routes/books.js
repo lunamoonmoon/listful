@@ -212,10 +212,20 @@ router.post("/assign_library", (req, res) => {
 
 })
 
-
-//INSERT NEW BOOK INTO BOOKS TABLE
-//Tested with postman Jan 8th, and working (need to re-test as we altered the server.js file)
-// router.post("/insert", (req, res) => {
+//     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
+//     VALUES ($1, $2, $3, $4, $5, $6)`;
+    
+    
+//     return db.query(queryString, [library_id, name, author, rating, notes, ownership])
+//     .then(({ rows }) => {
+//       console.log(rows);
+//       res.json(rows);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       res.status(500).json({ error: "Internal server error" });
+//     });
+//   } 
 
 //   //set to req.query for testing, but probalby needs to be req.body 
 //   const newBookObject = req.query; //unclear if this should be req.query or req.body

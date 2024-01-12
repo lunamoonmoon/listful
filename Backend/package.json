@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^1.6.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "googleapis": "^129.0.0",
@@ -12,7 +13,7 @@
     "build": "npx",
     "start": "npx nodemon server.js",
     "test": "jest",
-    "reset": "psql -U development -d listful < ./src/database/schemas/create.sql && psql -U development -d listful < ./src/database/schemas/development.sql"
+    "seed": "psql -U labber -d listful_development < ./src/database/schemas/create.sql && psql -U labber -d listful_development < ./src/database/schemas/seeds.sql"
   },
   "jest": {
     "testEnvironment": "node",

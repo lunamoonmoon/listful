@@ -2,8 +2,9 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <div>
-      Footer
+    <div data-testid='Footer'>
+      <footer>
+      </footer>
     </div>
   )
 };
