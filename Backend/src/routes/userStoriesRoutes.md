@@ -25,6 +25,8 @@ Adding items (logged in):
 
 As a user, I want to add items to my library, noting whether I own them, want to own them, or plan to read (wishlist)
 
+- ADD NEW BOOK TO LIBDRARY ROUTE (/books/insert)
+#note, does not include wishlist
 
 As a user, I want to be able to provide additional details for each item
 As a user, I want to be able to click an item to get more information (modal)

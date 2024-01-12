@@ -132,32 +132,35 @@ router.get("/name", (req, res) => {
 
 //POST ROUTES
 
-//Insert book into library (note this will insert a NEW book entirely...we will need a differnet query to add an existing book in teh books table to a library)
-
+//As a user, I want to add items to my library,
+//Insert new book into library (note this will insert a NEW book entirely...we will need a differnet query to add an existing book in teh books table to a library)
+//TESTED JAN 11TH 6:59PM
 router.post("/insert", (req, res) => {
 
   //set to req.query for testing, but probalby needs to be req.body 
-  const newBookObject = req.query; //unclear if this should be req.query or req.body
-  console.log("request object", req);
-  console.log("req query", req.query);
+  const newBookObject = req.body; //unclear if this should be req.query or req.body
+  //console.log("request object", req);
+  console.log("req body", req.body);
 
-  const insertNewBook = (newBookObject) => {
+  console.log("name: ", req.body.name)
+
+  const values = [
+    req.body.library_id,
+    req.body.name,
+    req.body.author,
+    req.body.rating,
+    req.body.ownership,
+    req.body.book_cover_link,
+    req.body.notes
+
+  ]
+
+  const insertNewBook = (values) => {
     const queryString = `INSERT INTO books (library_id, name, author, rating, ownership, book_cover_link, notes)
    VALUES ($1, $2, $3, $4, $5, $6, $7)`;
 
-   
 
-    const values = [
-      newBookObject.LIBRARY_ID,
-      newBookObject.NAME,
-      newBookObject.AUTHOR,
-      newBookObject.RATING,
-      newBookObject.OWNERSHIP,
-      newBookObject.BOOK_COVER_LINK,
-      newBookObject.NOTES
-
-
-    ];
+    console.log("VALUES:", values)
 
     db.query(queryString, values)
       .then(() => {
@@ -170,7 +173,7 @@ router.post("/insert", (req, res) => {
       });
   };
 
-  insertNewBook(newBookObject);
+  insertNewBook(values);
 });
 
 
