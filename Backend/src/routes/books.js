@@ -155,11 +155,13 @@ router.post("/assign_library", (req, res) => {
 
     const queryString = `UPDATE books 
     SET library_id = $1
-    WHERE book_id = $2;`
+    WHERE id = $2;`
 
+    //this has to be in sequential order it seems
     const values = [
+      library_id,
       book_id, 
-      library_id
+      
     ]
 
     db.query(queryString, values)

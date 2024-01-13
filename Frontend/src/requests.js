@@ -76,6 +76,25 @@ const handlePostInsertBook= async (postData) => {
   }
 };
 
+//assign book to library (you must have the book id already.
+//if you wish to insert a totally new book, use the insert book request/route
+//and it set the library id there for the nwe book)
+//note you must include both book_id, and library_id in postData
+
+//tested successfully Jan 13th, 2023
+const handlePostAssignBookToLibrary= async (postData) => {
+  try {
+    const response = await axios.post('http://localhost:8001/books/assign_library', postData);
+
+    const booksData = response.data;
+    console.log('Books Data:', booksData);
+   
+  } catch (error) {
+    console.error('Error:', error.message);
+
+  }
+};
+
 //TESTS
 
 //GET ALL BOOKS TEST
@@ -89,6 +108,17 @@ const handlePostInsertBook= async (postData) => {
 //GET BOOK BY NAME TEST
 // const bookNameResult = handleGetBookByName(1984)
 // console.log(bookNameResult)
+
+//ASSIGN BOOK TO LIBRARY TEST
+
+const postData = {
+  library_id: 2,
+  book_id: 14
+}
+
+const resultAssign = handlePostAssignBookToLibrary(postData)
+console.log(resultAssign)
+
 
 //LIBRARY FILTER TEST
 // const params = {
