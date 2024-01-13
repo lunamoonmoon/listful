@@ -6,28 +6,6 @@ router.use(express.json());
 
 //GET ROUTES
 
-//get all books
-router.get("/", (req, res) => {
-
-  //A get request to retreive information about books from a database
-  //Table BOOKS (ID, LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
-  const getAllBooks = () => {
-    return db
-      .query(`
-          SELECT *
-          FROM books;
-          `)
-      .then(({ rows }) => {
-        console.log(rows);
-        res.json(rows);
-      });
-
-  };
-
-  getAllBooks();
-
-});
-
 
 // //GET BOOKS BY USER ID
 //TESTED AND I THINK IT'S WORKING....JAN 9TH (BUT CURRENTLY RETURNING ALL BOOKS...BUT MAYBE ALL BOOKS ARE ASSOCIATED TO USER ID 1?)
@@ -63,42 +41,12 @@ router.get("/users/:id", (req, res) => {
 });
 
 
-
-
-//returning as raw JSON for resting purposes, see commented
-//possible make it a general object pass to the param
-
-//   //with assistance from lary AI bot
-// router.get("/author", (req, res) => {
-//   const authorName = req.query.author;
-//   // const authorName = req.body.author; // Get the author's name from the query string
-//   //const authorName = 'Joseph Heller' // this line for testing only, comment out and uncomment out above line
-
-//   const getBookByAuthor = (authorName) => {
-//     const queryString = `SELECT * FROM books WHERE author = $1`;
-//     //logs for testing purposes, delete for production
-//     console.log('QueryString:', queryString);
-//     console.log('AuthorName:', authorName);
-//     console.log('getBooksByAuthorName triggering');
-//     return db.query(queryString, [authorName]) // Pass author as a parameter to the query
-//       .then(({ rows }) => {
-//         console.log(rows);
-//         res.json(rows);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//         res.status(500).json({ error: "Internal server error" });
-//       });
-//   };
-
-//   getBookByAuthor(authorName);
-// });
-
-
 //name is the title of the book
 //tested manually and with postman - Jeremy
-router.get("/name", (req, res) => {
-  const name = req.query.name;
+router.get("/:name", (req, res) => {
+
+  console.log("get book by name")
+  const name = req.params.name;
   // const name = "Twilight"
 
   const getBookByTitle = (name) => {
@@ -119,6 +67,34 @@ router.get("/name", (req, res) => {
 
   getBookByTitle(name);
 });
+
+
+//insert new routes here, not below get all books or it will error
+
+//get all books
+router.get("/", (req, res) => {
+
+  console.log("get all books")
+
+  //A get request to retreive information about books from a database
+  //Table BOOKS (ID, LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
+  const getAllBooks = () => {
+    return db
+      .query(`
+          SELECT *
+          FROM books;
+          `)
+      .then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
+      });
+
+  };
+
+  getAllBooks();
+
+});
+
 
 //POST ROUTES
 
