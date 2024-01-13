@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Modal from "../BookModal/BookModal";
+import Modal from "../Modal/Modal";
 import About from "../About/About";
 import SignUpLogIn from "../SignUpLogIn/SignUpLogIn";
 import Searchbar from "../Searchbar/Searchbar";
+import Catalogue from "../Catalogue/Catalogue";
 import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +11,25 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch }) {
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [bookResults, setBookResults] = useState();
+
+  //lets catalogue go to backend and fetch from api
+  async function handleCatalogue() {
+    const searchInput = document.getElementById('searchValue').value;
+    try {
+      const res = await fetch(`http://localhost:8001/search?searchTerm=${searchInput}`, {
+      method: 'GET',
+    })
+    if(!res.ok) {
+      throw new Error(`Error: ${res.status}`);
+    }
+    const data = await res.json();
+    setBookResults(data);
+    } catch(err) {
+      console.error(`Error fetching books: ${err}`)
+    }
+  }
 
   const handleAboutUsClick = () => {
     setModalContent(<About />);
@@ -21,13 +41,14 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
     openModal(<SignUpLogIn setIsSignUp={setIsSignUp} />);
   };
 
+  const handleCatalogueClick = () => {
+    setModalContent(<Catalogue />);
+    openModal(<Catalogue />);
+  };
+
   const closeModal = () => {
     setModalContent(null);
     setIsModalOpen(false);
-  };
-
-  const onSearch = () =>{
-
   };
 
   return (
@@ -38,7 +59,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
       <div className="nav-icons">
         {isLoggedIn ? (
           <>
-            <button>Catalog</button>
+            <button onClick={handleCatalogue}>Catalog</button>
             <Searchbar handleSearch={handleSearch} className='searchbar' />
           </>
         ) : (
@@ -47,7 +68,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
               Catalog
             </button>
             <button disabled onClick={() => alert('Please log in to search our collection')}>
-              <Searchbar />
+              <Searchbar handleSearch={handleSearch} className='searchbar'/>
             </button>
           </>
         )}

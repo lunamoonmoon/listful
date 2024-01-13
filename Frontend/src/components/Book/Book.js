@@ -1,12 +1,11 @@
 import React from "react";
 
-export default function Book({ searchResults }) {
+export default function Book({ bookResults }) {
 
-  const books = searchResults.items;
   //googleAPI results are nested objects
   return (
     <div data-testid='Book'>
-      {books && books.map((book) => {
+      {bookResults && bookResults.map((book) => {
         return (
           <div key={book.id}>
             <h2>{book.volumeInfo.title}</h2>

@@ -1,33 +1,37 @@
 import React, { useState, useReducer } from 'react';
 import { initialState, searchReducer } from './hooks/searchReducer';
-import axios from 'axios';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home'
-import BookModal from './components/Modal/Modal';
 import Modal from './components/Modal/Modal';
-import SignUpLogIn from './components/SignUpLogIn/SignUpLogIn';
+import Book from './components/Book/Book';
 
 
 function App() {
   const [modalContent, setModalContent] = useState(null);
   const [isSignUp, setIsSignUp] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  let [modal, setModal] = useState(false);
-  let [isLoggedIn, setIsLoggedIn] = useState(false);
   const [state, dispatch] = useReducer(searchReducer, initialState);
   const { searchResults } = state;
 
-  const handleSearch = async (query) => {
+  //lets user search term go to backend and fetch from api
+  async function handleSearch() {
+    const searchInput = document.getElementById('searchValue').value;
     try {
-      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-      dispatch({ type: 'SET_SEARCH_RESULTS', payload: response.data });
-    } catch (error) {
-      console.error(`Error searching for books: ${error.message}`);
+      const res = await fetch(`http://localhost:8001/search?searchTerm=${searchInput}`, {
+      method: 'GET',
+    })
+    if(!res.ok) {
+      throw new Error(`Error: ${res.status}`);
     }
-  };
+    const data = await res.json();
+      dispatch({ type: 'SET_SEARCH_RESULTS', payload: data });
+    } catch(err) {
+      console.error(`Error fetching books: ${err}`)
+    }
+  }
 
   const openModal = (content) => {
     setModalContent(content);
@@ -41,21 +45,12 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar isLoggedIn={false} openModal={openModal} handleSearch={handleSearch}/> 
-      {/* alt-> isLoggedIn={isLoggedIn} */}
-      {modalContent && isSignUp && (
-        <SignUpLogIn closeModal={closeModal} setIsSignUp={setIsSignUp} />
-      )}
-      {modalContent && !isSignUp && (
-        <SignUpLogIn closeModal={closeModal} setIsSignUp={setIsSignUp} />
-      )}
+      <NavBar isLoggedIn={true} openModal={openModal} handleSearch={handleSearch}/>
+      < Book bookResults={searchResults} />
       <Home openModal={openModal} searchResults={searchResults} />
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />
-      )} 
-      {/* //<Home searchResults={searchResults}/>
-     //{ modal && <BookModal title="title" body="" /> } */}
-      <Footer />
+      )}
     </div>
   );
 }

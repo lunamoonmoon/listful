@@ -12,6 +12,7 @@
 
   .home-hero {
     width: 50%;
+    font-family: sans-serif;
 
     .heading {
       font-family: 'Poppins', sans-serif;
@@ -34,5 +35,11 @@
 
   .logo {
     width: 50%;
+
+    img {
+      width: 44rem;
+      height: 38rem;
+      object-fit: scale-down;
+    }
   }
 }
