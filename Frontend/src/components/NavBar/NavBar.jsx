@@ -8,7 +8,7 @@ import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch }) {
+export default function NavBar({ isLoggedIn, user, openModal, setIsSignUp, handleSearch, handleLogout }) {
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,25 +56,28 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
       <div className="logo">
         <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"} alt="Listful Logo" />
       </div>
-      <div className="nav-icons">
-        {isLoggedIn ? (
-          <>
-            <button onClick={handleCatalogue}>Catalog</button>
-            <Searchbar handleSearch={handleSearch} className='searchbar' />
-          </>
-        ) : (
-          <>
-            <button disabled onClick={() => alert('Please log in to see our collection')}>
-              Catalog
-            </button>
-            <button disabled onClick={() => alert('Please log in to search our collection')}>
-              <Searchbar handleSearch={handleSearch} className='searchbar'/>
-            </button>
-          </>
-        )}
-        <button onClick={handleAboutUsClick}>About Us</button>
-        <button onClick={handleSignUpLogInClick}> <FontAwesomeIcon icon={faUser} /> Sign Up/Log In</button>
-      </div>
+      {isLoggedIn ? (
+        // confirm here that user is logged in when the back end is connected, that the users name is displayed, and that the login/signup button has disappeared when logged in
+        <div className="user-info">
+          <span>Hi, {user.username}</span>
+          <button onClick={handleLogout}>Logout</button>
+          <button>Catalog</button>
+          <Searchbar handleSearch={handleSearch} className='searchbar' />
+        </div>
+      ) : (
+        <div className="nav-icons">
+          <button disabled onClick={() => alert('Please log in to see our collection')}>
+            Catalog
+          </button>
+          <button disabled onClick={() => alert('Please log in to search our collection')}>
+            <Searchbar />
+          </button>
+          <button onClick={handleAboutUsClick}>About Us</button>
+          <button onClick={handleSignUpLogInClick}>
+            <FontAwesomeIcon icon={faUser} /> Sign Up/Log In
+          </button>
+        </div>
+      )}
       {isModalOpen && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />
       )}

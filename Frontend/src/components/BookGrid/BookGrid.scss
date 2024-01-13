@@ -1,0 +1,22 @@
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.book-item {
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
