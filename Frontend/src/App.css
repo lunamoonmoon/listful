@@ -1,5 +1,5 @@
 .App {
-  background-image: url(/Users/icornell/lighthouse/listful/Frontend/public/listful_background.png);
+  background-image: url(../public/listful_background.png);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
