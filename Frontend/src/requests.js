@@ -48,9 +48,11 @@ const handleGetBookByName = async (name) => {
 
 //LIBRARY GET 
 
+//LIBRARY FILTER BY PARAMS
+//TESTED AND WORKING JAN 13TH
 const handleLibraryFilter = async (params) => {
   try {
-    const response = await axios.get('http://localhost:8001/library/filter', {params});
+    const response = await axios.get('http://localhost:8001/libraries/filter', {params});
     const booksData = response.data;
     console.log('Books Data:', booksData);
   } catch (error) {
@@ -87,6 +89,16 @@ const handlePostInsertBook= async (postData) => {
 //GET BOOK BY NAME TEST
 // const bookNameResult = handleGetBookByName(1984)
 // console.log(bookNameResult)
+
+//LIBRARY FILTER TEST
+// const params = {
+//   "library_id": 2,
+//   "rating": 5,
+//   "author": 'Joseph Heller'
+// }
+
+// const filterResults = handleLibraryFilter(params)
+// console.log(filterResults)
 
 //INSERT BOOK TEST
 // const postData = {
