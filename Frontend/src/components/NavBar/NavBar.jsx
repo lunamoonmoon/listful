@@ -3,33 +3,18 @@ import Modal from "../Modal/Modal";
 import About from "../About/About";
 import SignUpLogIn from "../SignUpLogIn/SignUpLogIn";
 import Searchbar from "../Searchbar/Searchbar";
-import Catalogue from "../Catalogue/Catalogue";
 import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch }) {
+export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch, handleCatalogue }) {
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [bookResults, setBookResults] = useState();
-
-  //lets catalogue go to backend and fetch from api
-  async function handleCatalogue() {
-    const searchInput = document.getElementById('searchValue').value;
-    try {
-      const res = await fetch(`http://localhost:8001/search?searchTerm=${searchInput}`, {
-      method: 'GET',
-    })
-    if(!res.ok) {
-      throw new Error(`Error: ${res.status}`);
-    }
-    const data = await res.json();
-    setBookResults(data);
-    } catch(err) {
-      console.error(`Error fetching books: ${err}`)
-    }
-  }
+  const handleCatalogueClick = (e) => {
+    e.preventDefault();
+    handleCatalogue();
+  };
 
   const handleAboutUsClick = () => {
     setModalContent(<About />);
@@ -39,11 +24,6 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
   const handleSignUpLogInClick = () => {
     setModalContent(<SignUpLogIn setIsSignUp={setIsSignUp} />);
     openModal(<SignUpLogIn setIsSignUp={setIsSignUp} />);
-  };
-
-  const handleCatalogueClick = () => {
-    setModalContent(<Catalogue />);
-    openModal(<Catalogue />);
   };
 
   const closeModal = () => {
@@ -59,7 +39,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
       <div className="nav-icons">
         {isLoggedIn ? (
           <>
-            <button onClick={handleCatalogue}>Catalog</button>
+            <button onClick={handleCatalogueClick}>Catalog</button>
             <Searchbar handleSearch={handleSearch} className='searchbar' />
           </>
         ) : (

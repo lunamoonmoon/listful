@@ -3,31 +3,17 @@ import SignUpLogIn from '../SignUpLogIn/SignUpLogIn';
 import Book from '../Book/Book';
 import './Home.scss';
 
-export default function Home({ openModal, searchResults }) {
-
-  //get libraries from db
-  // const [libraries, setLibraries] = useState([]);
-  // const [openModal, setOpenModal] = useState(false);
-
-  // useEffect(() => {
-  //   axios.get('http://localhost:8001/libraries')
-  //     .then(response => {
-  //       setLibraries(response.data);
-  //     })
-  //     .catch(err => {
-  //       console.error(`Error fetching libraries: ${err}`);
-  //     });
-  // }, []);
-
-
+export default function Home({ openModal, searchResults, bookResults }) {
 
   const handleSignUpNowClick = () => {
     openModal(<SignUpLogIn closeModal={() => openModal(null)} />);
   };
+
   return (
     <div data-testid='Home'>
-      {searchResults.length > 0 ? (
-        <Book searchResults={searchResults}/>
+      {console.log(searchResults)}
+      {searchResults.length > 0 || bookResults.length > 0 ? (
+        <Book bookResults={searchResults.length > 0 ? searchResults : bookResults }/>
       ) : (
         <div className='home-container'>
           <div className="logo">
@@ -39,7 +25,7 @@ export default function Home({ openModal, searchResults }) {
           <button onClick={handleSignUpNowClick}>Sign Up Now</button>
           </div>
         </div>
-      )}
+      )};
     </div>
   );
 };
