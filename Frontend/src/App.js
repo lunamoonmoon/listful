@@ -22,15 +22,15 @@ function App() {
 
   //-----FOR DEMONSTRATION PURPOSES----
   //"value" is a placeholder that needs to be replaced with the actual values 
-  const [postData, setPostData] = useState({
-    "library_id": value,
-    "name": value,
-    "author": value,
-    "rating": value,
-    "ownership": value,
-    "book_cover_link": value,
-    "notes": value,
-  });
+  // const [postData, setPostData] = useState({
+  //   "library_id": value,
+  //   "name": value,
+  //   "author": value,
+  //   "rating": value,
+  //   "ownership": value,
+  //   "book_cover_link": value,
+  //   "notes": value,
+  // });
   // //call insert book post handler, this will probably be called within a form submitt event handler?
   handleInsertBook(postData)
   //------------------------------------
