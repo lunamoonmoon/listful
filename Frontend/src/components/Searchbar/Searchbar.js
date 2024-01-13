@@ -19,8 +19,8 @@ export default function Searchbar({ handleSearch }) {
   return (
     <div className="searchbar" data-testid="Searchbar">
       <form onSubmit={handleSubmit}>
-        <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
-        <input placeholder="      Find Your Book" type="search" name='search' value={query} onChange={handleQuery}/>
+        {/* <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i> */}
+        <input placeholder="Find Your Book" id="searchValue" type="search" name='search' value={query} onChange={handleQuery}/>
         <button type="submit">Search</button>
       </form>
     </div>
