@@ -31,19 +31,10 @@ router.get("/", (req, res) => {
 
 // //GET BOOKS BY USER ID
 //TESTED AND I THINK IT'S WORKING....JAN 9TH (BUT CURRENTLY RETURNING ALL BOOKS...BUT MAYBE ALL BOOKS ARE ASSOCIATED TO USER ID 1?)
-router.get("/users", (req, res) => {
+router.get("/users/:id", (req, res) => {
 
-//I asked larry about using params instead
-///and it suggested that it might be better 
-//when trying to access a specific resource such as a specific id
-// router.get("/users/:userId/books", (req, res) => {
-//   const userId = req.params.userId;
-//   // ... rest of your code
-// });
-
-
-  console.log("id: ", req.query.id)
-  const id = req.query.id;
+  console.log("id: ", req.params.id)
+  const id = req.params.id;
   // const id = req.params.id
   const getBooksByUser = (id) => {
 

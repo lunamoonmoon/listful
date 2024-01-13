@@ -5,15 +5,29 @@ const getGetAllBooks = async () => {
   try {
     const response = await axios.get('http://localhost:8001/books');
 
-    // Axios automatically checks for HTTP response status
+   
     const booksData = response.data;
     console.log('Books Data:', booksData);
-    // Handle the response, e.g., update state or perform other actions
+    
   } catch (error) {
     console.error('Error:', error.message);
-    // Handle errors, e.g., show an error message to the user
+    
   }
 };
+
+
+//Get all books by user 
+//tested Jan 12th, working
+const getAllBooksByUserId = async (id) => {
+  try {
+    //note the use of back ticks in this particilar request, it is required for proper string interpolation
+    const response = await axios.get(`http://localhost:8001/books/users/${id}`);
+    const booksData = response.data;
+    console.log('Books Data:', booksData);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
 
 //
 
@@ -23,23 +37,27 @@ const postInsertBook= async (postData) => {
   try {
     const response = await axios.post('http://localhost:8001/books/insert', postData);
 
-    // Axios automatically checks for HTTP response status
     const booksData = response.data;
     console.log('Books Data:', booksData);
-    // Handle the response, e.g., update state or perform other actions
+   
   } catch (error) {
     console.error('Error:', error.message);
-    // Handle errors, e.g., show an error message to the user
+
   }
 };
 
-//TESTING 
+//TESTING CODE
 
 //get all books
 
 // console.log(getGetAllBooks)
 // const result = getGetAllBooks()
 // console.log(result)
+
+//get books by user id
+
+const resultById = getAllBooksByUserId(1)
+console.log(resultById)
 
 //insert books
 
@@ -57,6 +75,7 @@ const postInsertBook= async (postData) => {
 // const result = postInsertBook(postData)
 
 
-module.exports = { getGetAllBooks, postInsertBook };
+
+module.exports = { getGetAllBooks, postInsertBook, getAllBooksByUserId };
 
 
