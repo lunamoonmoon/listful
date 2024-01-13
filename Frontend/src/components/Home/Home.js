@@ -25,7 +25,7 @@ export default function Home({ openModal, searchResults, bookResults }) {
           <button onClick={handleSignUpNowClick}>Sign Up Now</button>
           </div>
         </div>
-      )};
+      )}
     </div>
   );
 };

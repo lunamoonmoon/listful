@@ -1,18 +1,20 @@
 import React from "react";
+import "./Book.scss";
 
 export default function Book({ bookResults }) {
 
   //googleAPI results are nested objects
   return (
-    <div data-testid='Book'>
+    <div data-testid='Book' className="book">
       {bookResults && bookResults.map((book) => {
         return (
-          <div key={book.id}>
-            <h2>{book.volumeInfo.title}</h2>
-            <p>{book.volumeInfo.authors}</p>
-            <p>{book.volumeInfo.description}</p>
-            <p>{book.volumeInfo.categories}</p>
-            <p>{book.volumeInfo.averageRating}</p>
+          <div key={book.id} className="book-container">
+            {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
+              <img src={book.volumeInfo.imageLinks.smallThumbnail} className="cover-image"></img>
+            ) : (
+              <p className="no-cover">No Cover Available</p>
+            )}
+            <h6>{book.volumeInfo.title}</h6>
           </div>
         );
       })}
