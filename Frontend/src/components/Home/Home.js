@@ -11,7 +11,6 @@ export default function Home({ openModal, searchResults, bookResults }) {
 
   return (
     <div data-testid='Home'>
-      {console.log(searchResults)}
       {searchResults.length > 0 || bookResults.length > 0 ? (
         <Book bookResults={searchResults.length > 0 ? searchResults : bookResults }/>
       ) : (

@@ -52,6 +52,11 @@ function App() {
     }
   };
 
+  const clearBooks = () => {
+    dispatch({ type: 'CLEAR_SEARCH_RESULTS' });
+    bookDispatch({ type: 'CLEAR_BOOK_RESULTS' });
+  };
+
   const openModal = (content) => {
     setModalContent(content);
     setIsModalOpen(true);
@@ -64,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar isLoggedIn={true} openModal={openModal} handleSearch={handleSearch} handleCatalogue={handleCatalogue} />
+      <NavBar isLoggedIn={true} openModal={openModal} handleSearch={handleSearch} handleCatalogue={handleCatalogue} clearBooks={clearBooks} />
       <Home openModal={openModal} searchResults={searchResults} bookResults={bookResults} />
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />

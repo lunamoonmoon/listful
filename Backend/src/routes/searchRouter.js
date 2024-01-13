@@ -30,7 +30,7 @@ const getBooks = async () => {
     const res = await axios.get(
       // `https://www.googleapis.com/books/v1/volumes/volumeId?key=${apiKey}`
       // `https://books.google.com/books?uid=109805484301862886584&as_coll=1001&source=gbs_lp_bookshelf_list?key=${apiKey}`
-      `https://www.googleapis.com/books/v1/user/109805484301862886584/bookshelves/1001/volumes?key=${apiKey}`
+      `https://www.googleapis.com/books/v1/users/109805484301862886584/bookshelves/1001/volumes?&maxResults=20&key=${apiKey}`
     );
     return res.data
   } catch (err) {
@@ -43,7 +43,7 @@ const searchBooks = async (searchTerm) => {
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${apiKey}`
+      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=20&key=${apiKey}`
     );
     return res.data
   } catch (err) {

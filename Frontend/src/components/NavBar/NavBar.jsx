@@ -7,7 +7,7 @@ import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch, handleCatalogue }) {
+export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearch, handleCatalogue, clearBooks }) {
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,7 +34,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
   return (
     <nav className="navbar-container">
       <div className="logo">
-        <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"} alt="Listful Logo" />
+        <img className="listful-nav-logo" src={process.env.PUBLIC_URL + "/listful_logo.png"} alt="Listful Logo" onClick={clearBooks} />
       </div>
       <div className="nav-icons">
         {isLoggedIn ? (
