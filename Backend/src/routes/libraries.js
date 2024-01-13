@@ -181,6 +181,11 @@ router.get("/filter", (req, res) => {
 
   //add any additional parameters here
   const library_id = req.query.library_id
+
+  if (!library_id) {
+    return res.status(400).json({ error: "Library ID is mandatory" });
+  }
+
   const authorName = req.query.author
   const rating = req.query.rating
   const name = req.query.name
@@ -199,22 +204,22 @@ router.get("/filter", (req, res) => {
     //conditional parameter handling
     //note, library_id is mandatory, not optional ergo there is not if statement for it
     if(authorName){
-      queryString += 'AND books.author = $2 '
+      queryString += ' AND books.author = $' + (values.length + 1)
       values.push(authorName)
     }
 
     if(rating){
-      queryString += 'AND books.rating = $3 '
+      queryString += ' AND books.rating = $' + (values.length + 1)
       values.push(rating)
     }
 
     if(name){
-      queryString += 'AND books.name = $4 '
+      queryString += ' AND books.name = $' + (values.length + 1)
       values.push(name)
     }
 
     if(ownership){
-      queryString += 'AND books.name = $5 '
+      queryString += ' AND books.name = $' + (values.length + 1)
       values.push(ownership)
     }
 

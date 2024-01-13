@@ -46,6 +46,19 @@ const handleGetBookByName = async (name) => {
 
 
 
+//LIBRARY GET 
+
+const handleLibraryFilter = async (params) => {
+  try {
+    const response = await axios.get('http://localhost:8001/library/filter', {params});
+    const booksData = response.data;
+    console.log('Books Data:', booksData);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+
 //Post routes
 //tested Jan 13th, working
 const handlePostInsertBook= async (postData) => {
@@ -91,6 +104,6 @@ const handlePostInsertBook= async (postData) => {
 
 
 
-module.exports = { handleGetGetAllBooks, handlePostInsertBook, handleGetAllBooksByUserId };
+module.exports = { handleGetGetAllBooks, handlePostInsertBook, handleGetAllBooksByUserId, handleGetBookByName};
 
 
