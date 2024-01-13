@@ -95,6 +95,22 @@ const handlePostAssignBookToLibrary= async (postData) => {
   }
 };
 
+
+//CREATE NEW LIBRARY...tested and worked Jan 13th
+//note postdata requires user_id, library name, and public (true/false)
+const handlePostCreateLibrary= async (postData) => {
+  try {
+    const response = await axios.post('http://localhost:8001/libraries/create', postData);
+
+    const booksData = response.data;
+    console.log('Books Data:', booksData);
+   
+  } catch (error) {
+    console.error('Error:', error.message);
+
+  }
+};
+
 //TESTS
 
 //GET ALL BOOKS TEST
@@ -111,13 +127,13 @@ const handlePostAssignBookToLibrary= async (postData) => {
 
 //ASSIGN BOOK TO LIBRARY TEST
 
-const postData = {
-  library_id: 2,
-  book_id: 14
-}
+// const postData = {
+//   library_id: 2,
+//   book_id: 14
+// }
 
-const resultAssign = handlePostAssignBookToLibrary(postData)
-console.log(resultAssign)
+// const resultAssign = handlePostAssignBookToLibrary(postData)
+// console.log(resultAssign)
 
 
 //LIBRARY FILTER TEST
@@ -143,6 +159,16 @@ console.log(resultAssign)
 // }
 
 // const result = handlePostInsertBook(postData)
+
+//CREATE LIBRARY TEST
+
+// const postData = {
+//   "user_id": 1,
+//   "library_name": "Best Sellers",
+//   "public": true
+// }
+// const createLibraryResult = handlePostCreateLibrary(postData)
+// console.log(createLibraryResult)
 
 
 
