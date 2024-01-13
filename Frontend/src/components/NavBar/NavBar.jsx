@@ -12,6 +12,25 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [bookResults, setBookResults] = useState();
+
+  //lets catalogue go to backend and fetch from api
+  async function handleCatalogue() {
+    const searchInput = document.getElementById('searchValue').value;
+    try {
+      const res = await fetch(`http://localhost:8001/search?searchTerm=${searchInput}`, {
+      method: 'GET',
+    })
+    if(!res.ok) {
+      throw new Error(`Error: ${res.status}`);
+    }
+    const data = await res.json();
+    setBookResults(data);
+    } catch(err) {
+      console.error(`Error fetching books: ${err}`)
+    }
+  }
+
   const handleAboutUsClick = () => {
     setModalContent(<About />);
     openModal(<About />);
@@ -40,7 +59,7 @@ export default function NavBar({ isLoggedIn, openModal, setIsSignUp, handleSearc
       <div className="nav-icons">
         {isLoggedIn ? (
           <>
-            <button onClick={handleCatalogueClick}>Catalog</button>
+            <button onClick={handleCatalogue}>Catalog</button>
             <Searchbar handleSearch={handleSearch} className='searchbar' />
           </>
         ) : (

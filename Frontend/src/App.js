@@ -1,6 +1,5 @@
 import React, { useState, useReducer } from 'react';
 import { initialState, searchReducer } from './hooks/searchReducer';
-import axios from 'axios';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home'
@@ -47,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <NavBar isLoggedIn={true} openModal={openModal} handleSearch={handleSearch}/>
-      < Book searchResults={searchResults} />
+      < Book bookResults={searchResults} />
       <Home openModal={openModal} searchResults={searchResults} />
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.type.name} body={modalContent} />
