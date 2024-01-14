@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import "./Searchbar.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export default function Searchbar({ handleSearch }) {
   const [query, setQuery] = useState([]);

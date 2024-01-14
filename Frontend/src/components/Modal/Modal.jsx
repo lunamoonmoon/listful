@@ -8,7 +8,7 @@ export default function Modal({ title, body, closeModal }) {
         {/* <BootstrapModal.Title>{title}</BootstrapModal.Title> */}
       </BootstrapModal.Header>
       <BootstrapModal.Body>
-        <div>{body}</div>
+        <p>{body}</p>
       </BootstrapModal.Body>
       <BootstrapModal.Footer>
         <Button variant="primary" onClick={closeModal}>
