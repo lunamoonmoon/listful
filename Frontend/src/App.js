@@ -66,6 +66,7 @@ function App() {
       }
       const data = await res.json();
       bookDispatch({ type: 'SET_BOOK_RESULTS', payload: data });
+      dispatch({ type: 'CLEAR_SEARCH_RESULTS' });
     } catch(err) {
       console.error(`Error fetching books: ${err}`)
     }
