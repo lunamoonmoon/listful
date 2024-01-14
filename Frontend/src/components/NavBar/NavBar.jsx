@@ -7,7 +7,6 @@ import "./NavBar.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-
 export default function NavBar({ isLoggedIn, user, openModal, setIsSignUp, handleSearch, handleLogout, handleCatalogue, clearBooks }) {
 
   const [modalContent, setModalContent] = useState(null);
@@ -42,7 +41,7 @@ export default function NavBar({ isLoggedIn, user, openModal, setIsSignUp, handl
         {isLoggedIn ? (
           // confirm here that user is logged in when the back end is connected, that the users name is displayed, and that the login/signup button has disappeared when logged in
           <div className="user-info">
-            <span>Hi, {user.username}</span>
+            {/* <span>Hi, {user.username}</span> */}
             <button onClick={handleLogout}>Logout</button>
             <button onClick={handleCatalogueClick}>Catalog</button>
             <Searchbar handleSearch={handleSearch} className='searchbar' />
