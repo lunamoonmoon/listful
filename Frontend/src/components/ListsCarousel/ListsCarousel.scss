@@ -1,0 +1,22 @@
+.lists-carousel {
+  margin-top: 16px;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 8px;
+}
+
+.list-item {
+  flex-shrink: 0;
+  width: 200px;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin-bottom: 8px;
+  }
+}
