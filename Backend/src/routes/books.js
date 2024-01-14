@@ -26,7 +26,6 @@ router.get("/users/:id", (req, res) => {
 
     db.query(queryString, values)
       .then(({ rows }) => {
-        console.log(rows);
         res.json(rows);
       })
       .catch(error => {
