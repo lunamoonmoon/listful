@@ -7,8 +7,8 @@ import Home from './components/Home/Home'
 import Modal from './components/Modal/Modal';
 
 //import requests
-import postInsertBook from './requests.js'
-import { Placeholder } from 'react-bootstrap';
+// import postInsertBook from './requests.js'
+// import { Placeholder } from 'react-bootstrap';
 
 
 function App() {
