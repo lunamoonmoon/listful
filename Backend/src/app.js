@@ -8,7 +8,6 @@ const app = express();
 
 const db = require("./database")
 const books = require("./routes/books");
-const search = require("./routes/searchRouter");
 
 function read(file) {
   return new Promise((resolve, reject) => {

@@ -12,7 +12,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 // helps retrieve env var from .env file
 require('dotenv').config();
 
-app.use('/', booksRouter);
+app.use('/books', booksRouter);
 app.use('/search', searchRouter);
 app.use('/libraries', librariesRouter);
 app.use('/users', usersRouter);

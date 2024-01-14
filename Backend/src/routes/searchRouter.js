@@ -5,9 +5,9 @@ const router = require("express").Router();
 //fetch data from api
 //get results of a users search from api
 router.get('/', async (req, res) => {
-  const term = req.query.searchTerm;
+  const searchTerm = req.query.searchTerm;
   try {
-    const searchResults = await searchBooks(term)
+    const searchResults = await searchBooks(searchTerm)
     res.json({ searchResults });
   } catch (err) {
     res.status(500).json({ err })

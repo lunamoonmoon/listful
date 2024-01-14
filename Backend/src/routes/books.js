@@ -41,8 +41,8 @@ router.get("/users/:id", (req, res) => {
 });
 
 
-//name is the title of the book
-//tested manually and with postman - Jeremy
+// name is the title of the book
+// tested manually and with postman - Jeremy
 router.get("/:name", (req, res) => {
 
   console.log("get book by name")

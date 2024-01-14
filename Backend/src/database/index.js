@@ -8,6 +8,7 @@ const dbParams = {
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT
+  
 };
 
 const db = new Pool(dbParams);
