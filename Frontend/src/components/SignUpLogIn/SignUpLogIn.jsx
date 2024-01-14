@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import './SignUpLogIn.scss';
 
+//LOGGED IN
+
+
 const SignUpLogIn = ({ closeModal, setIsSignUp }) => {
+
   const [isSignUp, setIsSignUpLocal] = useState(true);
+
+  const [isLoggedIn, setLoggedIn] = useState(false)
 
   const toggleSignUp = () => {
     setIsSignUpLocal((prevIsSignUp) => !prevIsSignUp);
