@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+//------GET HTTP REQUESTS-----
+
 //tested Jan 13th and and working
 const handleGetGetAllBooks = async () => {
   try {
@@ -59,10 +61,25 @@ const handleLibraryFilter = async (params) => {
   }
 }
 
+//USER GET
+//requires user id
+//test Jan 13th, working
+const handleGetUser = async (id) => {
+  try {
+    const response = await axios.get(`http://localhost:8001/users/${id}`);
+    const booksData = response.data;
+    console.log('Books Data:', booksData);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
 
-//Post routes
+
+//---POST ROUTES HTTP REQUESTS ----
+
+
 //tested Jan 13th, working
-const handlePostInsertBook= async (postData) => {
+const handlePostInsertBook = async (postData) => {
   try {
     const response = await axios.post('http://localhost:8001/books/insert', postData);
 
@@ -81,7 +98,7 @@ const handlePostInsertBook= async (postData) => {
 //note you must include both book_id, and library_id in postData
 
 //tested successfully Jan 13th, 2023
-const handlePostAssignBookToLibrary= async (postData) => {
+const handlePostAssignBookToLibrary = async (postData) => {
   try {
     const response = await axios.post('http://localhost:8001/books/assign_library', postData);
 
@@ -97,7 +114,7 @@ const handlePostAssignBookToLibrary= async (postData) => {
 
 //CREATE NEW LIBRARY...tested and worked Jan 13th
 //note postdata requires user_id, library name, and public (true/false)
-const handlePostCreateLibrary= async (postData) => {
+const handlePostCreateLibrary = async (postData) => {
   try {
     const response = await axios.post('http://localhost:8001/libraries/create', postData);
 
@@ -112,7 +129,10 @@ const handlePostCreateLibrary= async (postData) => {
 
 //USERS ROUTES
 
-const handlePostCreateUser= async (postData) => {
+//CREATE USER
+//Tested JAN 13TH, WORKING
+
+const handlePostCreateUser = async (postData) => {
   try {
     const response = await axios.post('http://localhost:8001/users/create', postData);
 
@@ -187,16 +207,23 @@ const handlePostCreateUser= async (postData) => {
 
 //CREATE USER TEST 
 
-const postData = {
-  "username": "JDutton",
-  "password": "fuzz",
-  "email": "jeremy@jeremy.com"
-}
+// const postData = {
+//   "username": "JDutton",
+//   "password": "fuzz",
+//   "email": "jeremy@jeremy.com"
+// }
 
-const createUserResult = handlePostCreateUser(postData)
-console.log(createUserResult)
+// const createUserResult = handlePostCreateUser(postData)
+// console.log(createUserResult)
 
 
-module.exports = { handleGetGetAllBooks, handlePostInsertBook, handleGetAllBooksByUserId, handleGetBookByName};
+//GET USER BY ID TEST
+
+const id = 1;
+
+const getUserResult = handleGetUser(id)
+console.log(getUserResult)
+
+module.exports = { handleGetGetAllBooks, handlePostInsertBook, handleGetAllBooksByUserId, handleGetBookByName, handleLibraryFilter, handlePostAssignBookToLibrary, handlePostCreateLibrary, handlePostCreateUser, handleGetUser};
 
 

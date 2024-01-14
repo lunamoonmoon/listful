@@ -7,6 +7,8 @@ router.use(express.json());
 
 //RETRIEVE ACCOUNT INFO (GET)
 
+//note if you create a get all users, do it beneath this ones or it will that route before it gets to the id one
+
 //get specific user info
 //tested Jan 13th
 router.get("/:id", (req, res) => {
