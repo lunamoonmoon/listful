@@ -7,7 +7,7 @@ import Modal from './components/Modal/Modal';
 import Book from './components/Book/Book';
 
 //import requests
-import postInsertBook from '../requests.js'
+import postInsertBook from './requests.js'
 import { Placeholder } from 'react-bootstrap';
 
 
@@ -32,7 +32,7 @@ function App() {
   //   "notes": value,
   // });
   // //call insert book post handler, this will probably be called within a form submitt event handler?
-  postInsertBook(postData)
+  // postInsertBook(postData)
   //------------------------------------
 
   //lets user search term go to backend and fetch from api

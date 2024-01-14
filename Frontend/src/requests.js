@@ -30,7 +30,6 @@ const handleGetAllBooksByUserId = async (id) => {
 }
 
 //Get book from books table by name 
-"/name"
 
 //where name is title not author name
 const handleGetBookByName = async (name) => {
@@ -111,6 +110,22 @@ const handlePostCreateLibrary= async (postData) => {
   }
 };
 
+//USERS ROUTES
+
+const handlePostCreateUser= async (postData) => {
+  try {
+    const response = await axios.post('http://localhost:8001/users/create', postData);
+
+    const booksData = response.data;
+    console.log('Books Data:', booksData);
+   
+  } catch (error) {
+    console.error('Error:', error.message);
+
+  }
+};
+
+
 //TESTS
 
 //GET ALL BOOKS TEST
@@ -170,6 +185,16 @@ const handlePostCreateLibrary= async (postData) => {
 // const createLibraryResult = handlePostCreateLibrary(postData)
 // console.log(createLibraryResult)
 
+//CREATE USER TEST 
+
+const postData = {
+  "username": "JDutton",
+  "password": "fuzz",
+  "email": "jeremy@jeremy.com"
+}
+
+const createUserResult = handlePostCreateUser(postData)
+console.log(createUserResult)
 
 
 module.exports = { handleGetGetAllBooks, handlePostInsertBook, handleGetAllBooksByUserId, handleGetBookByName};

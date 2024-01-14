@@ -9,6 +9,7 @@ router.use(express.json());
 
 // //GET BOOKS BY USER ID
 //TESTED AND I THINK IT'S WORKING....JAN 9TH (BUT CURRENTLY RETURNING ALL BOOKS...BUT MAYBE ALL BOOKS ARE ASSOCIATED TO USER ID 1?)
+//note this is pre-fixed by /books/ via the book router
 router.get("/users/:id", (req, res) => {
 
   console.log("id: ", req.params.id)

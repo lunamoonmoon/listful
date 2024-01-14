@@ -2,20 +2,22 @@ const express = require("express");
 const router = require("express").Router();
 const { query } = require("express");
 const db = require("../database/index.js");
-router.use(express.json()); 
+router.use(express.json());
 
 
 //RETRIEVE ACCOUNT INFO (GET)
 
 //get specific user info
+//tested Jan 13th
 router.get("/:id", (req, res) => {
 
-  const user = req.query.id;
+  const user_id = req.params.id;
 
-  const getUserInfo = (user) => {
+
+  const getUserInfo = (user_id) => {
     const queryString = `SELECT * FROM users WHERE id = $1`;
 
-    return db.query(querySTring, [id])
+    db.query(queryString, [user_id])
       .then(({ rows }) => {
         console.log(rows);
         res.json(rows);
@@ -26,12 +28,46 @@ router.get("/:id", (req, res) => {
       });
   };
 
+  getUserInfo(user_id);
+
 
 });
 
 //POST REQUESTS
 
 //create user
+
+
+router.post("/create", (req, res) => {
+
+  const values = [
+    req.body.username,
+    req.body.password,
+    req.body.email
+  ];
+
+  //TESTED Jan 13th...but I had a weird error where it auto incrementing from 1 instead of 4 (pre-seeded 1-3)
+  //it only worked on the 4th attempt. 
+  const createNewUser = (values) => {
+    const queryString = `INSERT INTO users (username, password, email)
+  VALUES ($1, $2, $3)`;
+
+    db.query(queryString, values)
+      .then(() => {
+        console.log('User created successfully');
+        res.json({ success: true });
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+      });
+
+  };
+
+  createNewUser(values);
+
+});
+
 
 
 
