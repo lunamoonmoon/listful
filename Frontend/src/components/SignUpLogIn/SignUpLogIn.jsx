@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect} from 'react';
 import './SignUpLogIn.scss';
 import { loginReducer, loginState } from '../../hooks/loginReducer';
 
@@ -9,13 +9,23 @@ const SignUpLogIn = ({ closeModal, setIsSignUp }) => {
 
   const [ userState, loginDispatch] = useReducer(loginReducer, loginState);
   //const { isLoggedIn } = loginState;
+ 
+  //for testing
+  useEffect(() => {
+    console.log("userState", userState);
+
+    // Close the modal when login state is set to 1
+    if (userState.loginState === 1) {
+      closeModal(); // Implement closeModal function to hide the modal
+    }
+  }, [userState]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
   
     //hard coded for testing
     loginDispatch({ type: 'SET_LOGIN', payload: 1 });
-    console.log(userState)
+  
 
     // // Implement authentication logic here with the routes we created - once signed up, render the catalogue page component
     // if (isSignUp) {
@@ -27,6 +37,10 @@ const SignUpLogIn = ({ closeModal, setIsSignUp }) => {
     // // Toggle the value of isSignUp
     // setIsSignUp(!isSignUp);
   };
+
+  useEffect(() => {
+    console.log("login State", userState);
+  }, [userState.loginState]);
 
   return (
     <div className="modal-content">

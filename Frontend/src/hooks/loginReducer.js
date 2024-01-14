@@ -7,7 +7,8 @@ const loginReducer = (state, action) => {
     case 'SET_LOGIN':
       return{ ...state, loginState: action.payload};
     case 'SET_LOGOUT':
-      return { ...state, loginState: ""};
+        return {state, loginState: "" };
+      
     default:
       return state;
   }
