@@ -12,7 +12,7 @@ export default function Home({ openModal, searchResults, bookResults }) {
   return (
     <div data-testid='Home'>
       {searchResults.length > 0 || bookResults.length > 0 ? (
-        <Book bookResults={searchResults.length > 0 ? searchResults : bookResults }/>
+        <Book bookResults={searchResults.length > 0 ? searchResults : bookResults } openModal={openModal} />
       ) : (
         <div className='home-container'>
           <div className="logo">
