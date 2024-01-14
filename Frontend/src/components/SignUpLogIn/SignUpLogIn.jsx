@@ -8,16 +8,30 @@ const SignUpLogIn = ({ closeModal, setIsSignUp }) => {
     setIsSignUpLocal((prevIsSignUp) => !prevIsSignUp);
   };
 
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   // Implement authentication logic here with the routes we created - once signed up, render the catalogue page component
+  //   if (isSignUp) {
+  //     console.log('Sign-up submitted');
+  //   } else {
+  //     console.log('Login submitted');
+  //   }
+  //   setIsSignUp(!isSignUp);
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     // Implement authentication logic here with the routes we created - once signed up, render the catalogue page component
     if (isSignUp) {
       console.log('Sign-up submitted');
     } else {
       console.log('Login submitted');
     }
-    setIsSignUp(isSignUp);
+  
+    // Toggle the value of isSignUp
+    setIsSignUp(!isSignUp);
   };
 
   return (

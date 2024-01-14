@@ -6,6 +6,10 @@ import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home'
 import Modal from './components/Modal/Modal';
 
+//import requests
+import postInsertBook from './requests.js'
+import { Placeholder } from 'react-bootstrap';
+
 
 function App() {
   const [modalContent, setModalContent] = useState(null);
@@ -15,6 +19,21 @@ function App() {
 
   const [state, dispatch] = useReducer(searchReducer, initialState);
   const { searchResults } = state;
+
+  //-----FOR DEMONSTRATION PURPOSES----
+  //"value" is a placeholder that needs to be replaced with the actual values 
+  // const [postData, setPostData] = useState({
+  //   "library_id": value,
+  //   "name": value,
+  //   "author": value,
+  //   "rating": value,
+  //   "ownership": value,
+  //   "book_cover_link": value,
+  //   "notes": value,
+  // });
+  // //call insert book post handler, this will probably be called within a form submitt event handler?
+  // postInsertBook(postData)
+  //------------------------------------
 
   //lets user search term go to backend and fetch from api
   async function handleSearch() {
@@ -76,6 +95,8 @@ function App() {
       )}
     </div>
   );
+
+
 }
 
 export default App;

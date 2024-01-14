@@ -1,5 +1,5 @@
 TRUNCATE TABLE GENRE_BOOKS, BOOKS CASCADE;
-TRUNCATE TABLE LISTS CASCADE;
+TRUNCATE TABLE LIBRARIES CASCADE;
 TRUNCATE TABLE USERS CASCADE;
 TRUNCATE TABLE GENRES CASCADE;
 
@@ -9,17 +9,17 @@ VALUES
   (2, 'celestestar', 'astronomy', 'stargazer@gmail.com'),
   (3, 'kkslider', 'singingtime', 'kkslider@gmail.com');
 
-INSERT INTO LISTS (USER_ID, LIST_NAME, PUBLIC)
+INSERT INTO LIBRARIES (USER_ID, LIBRARY_NAME, PUBLIC)
 VALUES 
   (1, 'Fav Books', true),
   (1, 'Comics to Read', true),
   (2, 'Classics', true);
 
-INSERT INTO BOOKS (NAME, AUTHOR, RATING, NOTES, OWNERSHIP)
+INSERT INTO BOOKS (LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, BOOK_COVER_LINK, OWNERSHIP)
 VALUES 
-  ('1984', 'George Orwell', 5, 'So good!', true),
-  ('Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', true),
-  ('Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', false);
+  (2, '1984', 'George Orwell', 5, 'So good!', 'http://tinyurl.com/43w7vyrf',true),
+  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', 'http://tinyurl.com/43w7vyrf', true),
+  (1, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', 'http://tinyurl.com/43w7vyrf',false);
 
 INSERT INTO GENRES (NAME)
 VALUES 
