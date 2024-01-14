@@ -1,13 +1,13 @@
 const loginState = {
-  loginState: false,
+  loginState: "",
 };
 
 const loginReducer = (state, action) => {
   switch (action.type) {
     case 'SET_LOGIN':
-      return{ ...state, isLoggedIn: action.payload};
+      return{ ...state, loginState: action.payload};
     case 'SET_LOGOUT':
-      return { ...state, isLoggedIn: action.payload};
+      return { ...state, loginState: ""};
     default:
       return state;
   }
