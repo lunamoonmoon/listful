@@ -15,6 +15,7 @@ router.get("/books", (req, res) => {
           FROM books;
           `)
         .then(({ rows }) => {
+          console.log(rows);
           res.json(rows);
         });
         
@@ -36,8 +37,12 @@ router.get("/books", (req, res) => {
     const getBookByAuthor = (authorName) => {
       const queryString = `SELECT * FROM books WHERE author = $1`;
       //logs for testing purposes, delete for production
+      console.log('QueryString:', queryString);
+      console.log('AuthorName:', authorName);
+      console.log('getBooksByAuthorName triggering')
       return db.query(queryString, [authorName]) // Pass author as a parameter to the query
       .then(({ rows }) => {
+        console.log(rows);
         res.json(rows);
       })
       .catch(error => {
@@ -57,8 +62,10 @@ router.get("/books", (req, res) => {
 
     const getBookByTitle = (name) => {
           const queryString = `SELECT * FROM books WHERE name =$1`
+          console.log('QueryString:', queryString);
           return db.query(queryString, [name])
           .then(({ rows }) => {
+            console.log(rows);
             res.json(rows);
             // return data.rows[0]
           })
@@ -82,6 +89,7 @@ router.get("/books", (req, res) => {
           FROM Libraries;
           `)
         .then(({ rows }) => {
+          console.log(rows);
           res.json(rows);
         });
         
@@ -103,6 +111,7 @@ router.get("/libraries/:library_id", (req, res) => {
         WHERE LIBRARY_ID = $1;
         `, [library_id])
       .then(({ rows }) => {
+        console.log(rows);
         res.json(rows);
       });
   };
