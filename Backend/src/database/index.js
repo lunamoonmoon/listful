@@ -12,7 +12,6 @@ const dbParams = {
 };
 
 const db = new Pool(dbParams);
-
 // db
 //   .connect()
 //   .then(() => {
