@@ -10,7 +10,7 @@ As a user, I want to create a library for my media collection - books, (stretch:
 - /libraries/create route (testing/working)
 
 As a user, I want to easily categorize items/lists in my library
-
+ - note from Jeremy: there is no where to store lists in schema as it is set in the documentation
   - ()
 
 As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc. 
