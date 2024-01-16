@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
+import * as React from 'react';
 import "./Book.scss";
 import BookDetails from "../BookDetails/BookDetails";
 
 export default function Book({ bookResults, openModal }) {
+  const [alertVisable, setAlertVisable] = useState(false);
 
   const handleAddBook = (book) => {
     const postData = {
@@ -26,12 +28,27 @@ export default function Book({ bookResults, openModal }) {
       body: JSON.stringify(postData),
     })
       .then(response => response.json())
+      .then(() => {
+        setAlertVisable(true);
+      })
       .catch(error => console.error('Error:', error));
+      // .catch(err => {
+      //   setAlertVisable(true);
+      // })
   };
 
   //googleAPI results are nested objects
   return (
     <div data-testid='Book' className="book">
+      {/* { alertVisable && (
+        <Alert
+          icon={<CheckIcon fontSize="inherit" />}
+          severity="success"
+          onClose={() => setAlertVisable(false)}
+        >
+          Here is a gentle confirmation that your action was successful.
+        </Alert>
+      )} */}
       {bookResults && bookResults.map((book) => {
         return (
           <div key={book.id} className="book-container" onClick={() => {
