@@ -7,13 +7,14 @@
     "googleapis": "^129.0.0",
     "nodemon": "^3.0.2",
     "pg": "^8.11.3",
+    "pg-promise": "^11.5.4",
     "postgres": "^3.4.3"
   },
   "scripts": {
     "build": "npx",
     "start": "npx nodemon server.js",
     "test": "jest",
-    "seed": "psql -U labber -d listful_development < ./src/database/schemas/create.sql && psql -U labber -d listful_development < ./src/database/schemas/seeds.sql"
+    "seed": "psql -U labber -d listful_development < ./src/database/schemas/create2.sql && psql -U labber -d listful_development < ./src/database/schemas/seeds2.sql"
   },
   "jest": {
     "testEnvironment": "node",

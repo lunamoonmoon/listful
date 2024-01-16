@@ -6,19 +6,15 @@ const axios = require('axios');
 const handleGetGetAllBooks = async () => {
   try {
     const response = await axios.get('http://localhost:8001/books');
-
-   
     const booksData = response.data;
     console.log('Books Data:', booksData);
-    
   } catch (error) {
     console.error('Error:', error.message);
-    
+
   }
 };
 
-
-//Get all books by user 
+//Get all books by user
 //tested Jan 12th, working
 const handleGetAllBooksByUserId = async (id) => {
   try {
@@ -31,7 +27,7 @@ const handleGetAllBooksByUserId = async (id) => {
   }
 }
 
-//Get book from books table by name 
+//Get book from books table by name
 
 //where name is title not author name
 const handleGetBookByName = async (name) => {
@@ -47,7 +43,7 @@ const handleGetBookByName = async (name) => {
 
 
 
-//LIBRARY GET 
+//LIBRARY GET
 
 //LIBRARY FILTER BY PARAMS
 //TESTED AND WORKING JAN 13TH
@@ -85,10 +81,8 @@ const handlePostInsertBook = async (postData) => {
 
     const booksData = response.data;
     console.log('Books Data:', booksData);
-   
   } catch (error) {
     console.error('Error:', error.message);
-
   }
 };
 
@@ -104,7 +98,7 @@ const handlePostAssignBookToLibrary = async (postData) => {
 
     const booksData = response.data;
     console.log('Books Data:', booksData);
-   
+
   } catch (error) {
     console.error('Error:', error.message);
 
@@ -120,7 +114,7 @@ const handlePostCreateLibrary = async (postData) => {
 
     const booksData = response.data;
     console.log('Books Data:', booksData);
-   
+
   } catch (error) {
     console.error('Error:', error.message);
 
@@ -138,7 +132,7 @@ const handlePostCreateUser = async (postData) => {
 
     const booksData = response.data;
     console.log('Books Data:', booksData);
-   
+
   } catch (error) {
     console.error('Error:', error.message);
 
@@ -152,7 +146,7 @@ const handlePostCreateUser = async (postData) => {
 // const result = handleGetGetAllBooks()
 // console.log(result)
 
-//GET ALL BOOKS BY USER ID TEST 
+//GET ALL BOOKS BY USER ID TEST
 // const resultById = handleGetAllBooksByUserId(1)
 // console.log(resultById)
 
@@ -205,7 +199,7 @@ const handlePostCreateUser = async (postData) => {
 // const createLibraryResult = handlePostCreateLibrary(postData)
 // console.log(createLibraryResult)
 
-//CREATE USER TEST 
+//CREATE USER TEST
 
 // const postData = {
 //   "username": "JDutton",
@@ -219,10 +213,10 @@ const handlePostCreateUser = async (postData) => {
 
 //GET USER BY ID TEST
 
-const id = 1;
+// const id = 1;
 
-const getUserResult = handleGetUser(id)
-console.log(getUserResult)
+// const getUserResult = handleGetUser(id)
+// console.log(getUserResult)
 
 module.exports = { handleGetGetAllBooks, handlePostInsertBook, handleGetAllBooksByUserId, handleGetBookByName, handleLibraryFilter, handlePostAssignBookToLibrary, handlePostCreateLibrary, handlePostCreateUser, handleGetUser};
 

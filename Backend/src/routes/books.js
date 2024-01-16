@@ -1,11 +1,23 @@
+const axios = require('axios');
 const express = require("express");
+const cors = require("cors");
 const router = require("express").Router();
-const { query } = require("express");
 const db = require("../database/index.js");
+
 router.use(express.json());
+// router.use(cors());
+router.use(cors({
+  origin: "http://localhost:3000",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+}));
+
+require('dotenv').config();
+
+// ... (rest of your routes)
+
 
 //GET ROUTES
-
 
 // //GET BOOKS BY USER ID
 //TESTED AND I THINK IT'S WORKING....JAN 9TH (BUT CURRENTLY RETURNING ALL BOOKS...BUT MAYBE ALL BOOKS ARE ASSOCIATED TO USER ID 1?)
@@ -100,48 +112,22 @@ router.get("/", (req, res) => {
 
 //As a user, I want to add items to my library,
 //Insert new book into library (note this will insert a NEW book entirely...we will need a differnet query to add an existing book in teh books table to a library)
-//TESTED JAN 11TH 6:59PM
-router.post("/insert", (req, res) => {
-
-  //set to req.query for testing, but probalby needs to be req.body 
-  const newBookObject = req.body; //unclear if this should be req.query or req.body
-  //console.log("request object", req);
-  console.log("req body", req.body);
-
-  console.log("name: ", req.body.name)
-
-  const values = [
-    req.body.library_id,
-    req.body.name,
-    req.body.author,
-    req.body.rating,
-    req.body.ownership,
-    req.body.book_cover_link,
-    req.body.notes
-
-  ]
-
-  const insertNewBook = (values) => {
-    const queryString = `INSERT INTO books (library_id, name, author, rating, ownership, book_cover_link, notes)
-   VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-
-
-    console.log("VALUES:", values)
-
-    db.query(queryString, values)
-      .then(() => {
-        console.log('Book inserted successfully');
-        res.json({ success: true });
-      })
-      .catch(error => {
-        console.error(error);
-        res.status(500).json({ success: false, error: "Internal server error" });
-      });
-  };
-
-  insertNewBook(values);
+router.post("/insert", async(req, res) => {
+  console.log("server");
+  console.log(req.body);
+  const { library_id, name, author, rating, ownership, book_cover_link, notes } = req.body;
+  const queryString = `INSERT INTO books (library_id, name, author, rating, ownership, book_cover_link, notes) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+  const values = [library_id, name, author, rating, ownership, book_cover_link, notes];
+  db.query(queryString, values)
+  .then(() => {
+    console.log('Book inserted successfully');
+    res.json({ success: true });
+  })
+  .catch(error => {
+    console.error(error.stack);
+    res.status(500).json({ success: false, error: error.message + "Internal server error" });
+  });
 });
-
 
 //ASSIGN BOOK TO LIBRARY (requires you to already have the book_id
 //not yet tested
@@ -180,57 +166,4 @@ router.post("/assign_library", (req, res) => {
 
 })
 
-//     const queryString = `INSERT INTO books (library_id, name, author, rating, notes, ownership)
-//     VALUES ($1, $2, $3, $4, $5, $6)`;
-    
-    
-//     return db.query(queryString, [library_id, name, author, rating, notes, ownership])
-//     .then(({ rows }) => {
-//       console.log(rows);
-//       res.json(rows);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).json({ error: "Internal server error" });
-//     });
-//   } 
-
-//   //set to req.query for testing, but probalby needs to be req.body 
-//   const newBookObject = req.query; //unclear if this should be req.query or req.body
-//   console.log("request object", req);
-//   console.log("req query", req.query);
-
-//   const insertNewBook = (newBookObject) => {
-//     const queryString = `INSERT INTO books (name, author, rating, ownership, book_cover_link, notes)
-//    VALUES ($1, $2, $3, $4, $5, $6)`;
-
-//     const values = [
-//       newBookObject.NAME,
-//       newBookObject.AUTHOR,
-//       newBookObject.RATING,
-//       newBookObject.OWNERSHIP,
-//       newBookObject.BOOK_COVER_LINK,
-//       newBookObject.NOTES
-
-
-//     ];
-
-//     db.query(queryString, values)
-//       .then(() => {
-//         console.log('Book inserted successfully');
-//         res.json({ success: true });
-//       })
-//       .catch(error => {
-//         console.error(error);
-//         res.status(500).json({ success: false, error: "Internal server error" });
-//       });
-//   };
-
-//   insertNewBook(newBookObject);
-// });
-
-
-
-
-//do we need to export these functions? I think so...- Jeremy
 module.exports = router;
