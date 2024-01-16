@@ -18,15 +18,19 @@ Title: Listful App Showcase
 
 [Luna begins navigating through the app interface.]
 
-**Taylor:** Thanks, Luna! To kick things off, we've streamlined the login process, making it super easy to access your own profile. From here, you can create and manage your very own favorites list. Watch as we effortlessly add a book to our favorites right here.
+**Taylor:** Thanks, Luna! Let's dive into Listful's user-friendly features. First, you can effortlessly log in, and when you do you are greeted with your own personalized user page where you can create and manage your favorites list.
 
-[Luna shows add a favorite feature]
+[Luna shows how the login functionality works]
 
-**Taylor:** In addition to the favorites list, we feel we've perfected the book-browsing process. Exploring our extensive collection is now a breeze. Let me show you how straightforward it is to find the perfect book for your taste.
+**Taylor:** Now, lets imagine a friend recommends a book, but you're not ready to read it yet. We've all been there! With our search bar functionality, finding and adding that book to your 'To Read' list is a breeze. Watch as we search for a book and add it to our favorites list right here.
 
-[Luna shows how to browse through the collection of books]
+[Luna shows how to search for a book and add it to a list]
 
-**Taylor:** "Now, moving beyond browsing and adding books to your list, have you ever wondered what other readers think of a book? Listful has got you covered! You can view the average rating for each book, gaining insights into popular picks. It's a fantastic way to discover new reads and connect with the reading community. Let's take a look at how we can access this valuable feature."
+**Taylor:** But our app isn't just about managing what you already know; it's about discovering new reads. We've perfected the book browsing process. Let us show you how straightforward it is to explore our extensive collection and find the right book for your taste.
+
+[Luna shows how to browse through the catalog of books]
+
+**Taylor:** Now, moving beyond browsing and adding books to your list, have you ever wondered what other readers think of a book? Listful has got you covered! You can easily view the average rating for each book, gaining insights into popular picks. It's a fantastic way to discover new reads and connect with the reading community. Let's take a look at how we can access this valuable feature.
 
 [Luna shows how to see the average rating of a book]
 
