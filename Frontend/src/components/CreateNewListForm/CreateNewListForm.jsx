@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CreateNewListForm = ({ onSubmit, onCancel }) => {
+const CreateNewListForm = ({ onSubmit, onCancel,  }) => {
   const [listName, setListName] = useState('');
 
   const handleSubmit = (event) => {

@@ -1,21 +1,25 @@
-import React from 'react';
-import './ListsCarousel.scss'; 
-import BookGrid from './BookGrid';
-import CreateNewListForm from '../CreateNewListForm/CreateNewListForm';
+import React from "react";
+import "./ListsCarousel.scss";
+import BookGrid from "../BookGrid/BookGrid";
+import CreateNewListForm from "../CreateNewListForm/CreateNewListForm";
 
-const ListsCarousel = ({ lists, onBookClick, onCreateList }) => {
+const ListsCarousel = ({ libraries, onBookClick, onCreateList }) => {
   return (
     <div className="lists-carousel">
-      {/* Display lists using a horizontal scrolling carousel */}
       <div className="carousel-container">
-        {lists.map((list) => (
-          <div key={list.id} className="list-item">
-            {/* Display list name */}
-            <h3>{list.name}</h3>
-            {/* Render books associated with the list */}
-            <BookGrid books={list.books} onBookClick={onBookClick} />
-          </div>
-        ))}
+        {libraries &&
+          libraries.map((library, index) => (
+            <div key={index} className="list-item">
+              <h3>{library.category}</h3>
+              {library.books.length > 0 ? (
+                <BookGrid
+                  books={library.books}
+                  onBookClick={onBookClick}
+                  onCreateList={onCreateList}
+                  />
+                ) : (<p>No books in this list yet!</p>)}
+            </div>
+          ))}
       </div>
     </div>
   );
