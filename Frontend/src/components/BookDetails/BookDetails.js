@@ -2,6 +2,12 @@ import React from "react";
 import "./BookDetails.scss";
 
 export default function Book({ book }) {
+  const {
+    id,
+    title,
+    authors,
+    description,
+  } = book.volumeInfo
 
   const handleStars = (stars) => {
     let numStars = [];
@@ -13,7 +19,7 @@ export default function Book({ book }) {
 
   return (
     <div data-testid='book-details' className="book-details">
-          <div key={book.id}>
+          <div key={id}>
             <div className="img-container">
               {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
                 <img src={book.volumeInfo.imageLinks.smallThumbnail} className="cover-image" alt="cover of book"></img>
@@ -22,13 +28,13 @@ export default function Book({ book }) {
               )}
             </div>
             <div className="heading">
-              <h2 className="title">{book.volumeInfo.title}</h2>
+              <h2 className="title">{title}</h2>
               <div className="stars">
                 {book.volumeInfo.averageRating ? (handleStars(book.volumeInfo.averageRating)) : null}
               </div>
             </div>
-            <p>by {book.volumeInfo.authors.join(', ')}</p>
-            <p>{book.volumeInfo.description}</p>
+            <p>by {authors.join(', ')}</p>
+            <p>{description}</p>
           </div>
     </div>
   );

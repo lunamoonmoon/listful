@@ -1,6 +1,7 @@
 import React from 'react';
 import SignUpLogIn from '../SignUpLogIn/SignUpLogIn';
 import Book from '../Book/Book';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import './Home.scss';
 
 export default function Home({ openModal, searchResults, bookResults }) {
@@ -12,7 +13,10 @@ export default function Home({ openModal, searchResults, bookResults }) {
   return (
     <div data-testid='Home'>
       {searchResults.length > 0 || bookResults.length > 0 ? (
-        <Book bookResults={searchResults.length > 0 ? searchResults : bookResults } openModal={openModal} />
+        <div>
+          <Book bookResults={searchResults.length > 0 ? searchResults : bookResults } openModal={openModal} />
+          <ScrollToTop />
+        </div>
       ) : (
         <div className='home-container'>
           <div className="logo">
