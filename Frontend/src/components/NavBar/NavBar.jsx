@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import Modal from "../Modal/Modal";
 import Home from "../Home/Home";
 import About from "../About/About";
@@ -7,6 +7,7 @@ import Searchbar from "../Searchbar/Searchbar";
 import "./NavBar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { loginReducer, loginState } from "../../hooks/loginReducer";
 
 export default function NavBar({
   isLoggedIn,
@@ -21,6 +22,8 @@ export default function NavBar({
 }) {
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userState, loginDispatch] = useReducer(loginReducer, loginState);
+
 
   const handleCatalogueClick = (e) => {
     e.preventDefault();
@@ -43,8 +46,34 @@ export default function NavBar({
   };
 
   const handleLogoutClick = () => {
-    <Home />;
+    loginDispatch({ type: 'SET_LOGOUT', payload: 1 });
+    console.log("handleLogout triggered")
+    console.log("userState", userState)
+    
   };
+
+  useEffect(() => {
+    console.log("login State", userState);
+  }, [userState.loginState]);
+
+  //logout function 
+
+    //const { isLoggedIn } = loginState;
+   
+    //for testing
+
+  
+  
+      // // Implement authentication logic here with the routes we created - once signed up, render the catalogue page component
+      // if (isSignUp) {
+      //   console.log('Sign-up submitted');
+      // } else {
+      //   console.log('Login submitted');
+      // }
+    
+      // // Toggle the value of isSignUp
+      // setIsSignUp(!isSignUp);
+    
 
   return (
     <nav className="navbar-container">
