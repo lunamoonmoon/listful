@@ -8,6 +8,8 @@ import "./NavBar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { loginReducer, loginState } from "../../hooks/loginReducer";
+// import { useHistory } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function NavBar({
   isLoggedIn,
@@ -45,10 +47,13 @@ export default function NavBar({
     setIsModalOpen(false);
   };
 
+  // const navigate = useNavigate(); 
+
   const handleLogoutClick = () => {
     loginDispatch({ type: 'SET_LOGOUT', payload: 1 });
     console.log("handleLogout triggered")
     console.log("userState", userState)
+    // navigate.push("/"); // Redirect to the home page
     
   };
 
