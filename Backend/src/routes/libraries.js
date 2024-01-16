@@ -67,15 +67,14 @@ router.post("/create", (req, res) => {
 router.get("/filter", (req, res) => {
 
   //add any additional parameters here
-  const library_id = req.query.library_id
-
+  const library_id = req.body.library_id
   if (!library_id) {
     return res.status(400).json({ error: "Library ID is mandatory" });
   }
-
-  const authorName = req.query.author
-  const rating = req.query.rating
-  const name = req.query.name
+  //changed to body as the data is coming in from a form 
+  const authorName = req.body.author
+  const rating = req.body.rating
+  const name = req.body.title
   const ownership = req.query.ownership
 
   //be sure to update the argumetns if you add any params

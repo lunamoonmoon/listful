@@ -7,41 +7,51 @@ import { filterReducer, initialFilterState } from '../../hooks/filterReducerRedu
 
 const FilterLibrary = ({ closeModal }) => {
 
-  const [ userState, filterDispatch] = useReducer(filterReducer, initialFilterState);
+  const [ filterState, filterDispatch] = useReducer(filterReducer, initialFilterState);
 
-  //const { isLoggedIn } = loginState;
+
  
   //for testing
   useEffect(() => {
-    console.log("userState", userState);
+    console.log("userState", filterState);
 
     // Close the modal when login state is set to 1
-    if (userState.loginState === 1) {
+    if (filterState.loginState === 1) {
       closeModal(); // Implement closeModal function to hide the modal
     }
-  }, [userState]);
+  }, [filterState]);
 
-  const handleSubmit = (event) => {
+  const handleSubmitFilterSearch = async (event) => {
+
     event.preventDefault();
-  
-    //hard coded for testing
-    loginDispatch({ type: 'SET_LOGIN', payload: 1 });
-  
 
-    // // Implement authentication logic here with the routes we created - once signed up, render the catalogue page component
-    // if (isSignUp) {
-    //   console.log('Sign-up submitted');
-    // } else {
-    //   console.log('Login submitted');
-    // }
-  
-    // // Toggle the value of isSignUp
-    // setIsSignUp(!isSignUp);
-  };
+    try {
 
-  useEffect(() => {
-    console.log("login State", userState);
-  }, [userState.loginState]);
+      const formData = new FormData(event.target)
+       
+      const response = await fetch('http://localhost:8001/libraries/filter', {
+        method: 'GET',
+        headers: {
+
+        },
+
+        body: formData
+
+      })
+
+      if(!response.ok) {
+        console.error('Server error:', response.statusText)
+        return;
+      }
+
+      const data = await response.json();
+      console.log('Filtered library data:', data);
+
+    } catch (error) {
+      console.error('Error during API request:', error.message)
+    }
+
+  }
 
   return (
     <div className="modal-content">
@@ -55,13 +65,15 @@ const FilterLibrary = ({ closeModal }) => {
         </div>
         <div className="text-container">
           <h2>Log In</h2>
-          <form onSubmit={handleSubmit}>
-            {userState ? <input type="text" placeholder="Name" /> : null}
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+          <form onSubmit={handleSubmitFilterSearch}>
+            <input type="text" placeholder="Library ID" />
+            <input type="email" placeholder="Title" />
+            <input type="password" placeholder="Author" />
+            <input type="password" placeholder="Rating" />
+            <input type="password" placeholder="Ownership" />
 
             {/* <button type="submit">{userState ? 'Sign Up' : 'Log In'}</button> */}
-             <button type="submit"> Login </button>
+             <button type="submit"> Search Library </button>
           </form>
           <p>
             {/* {userState ? 'Already have an account?' : "Don't have an account?"}{' '}
