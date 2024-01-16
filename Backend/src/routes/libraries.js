@@ -80,13 +80,14 @@ router.get("/filter", (req, res) => {
 
   //be sure to update the argumetns if you add any params
   //be sure to ALSO UPDATE THE ARGUEMENTS IN THE FUNCTION CALL AT THE BOTTOM OF THE ROUTE!
-  const filterLibrary = (rating, library_id, authorName, name, ownership) => {
+  const filterLibrary = (library_id, authorName, rating, name, ownership) => {
 
     console.log("query params: ", req.query)
     let queryString = 'SELECT * FROM books JOIN libraries ON books.library_id = libraries.id WHERE libraries.id = $1 '
 
     //optional parameters pushed to array if present, see below
-    values = [library_id]
+    const values = [library_id]
+    const test = library_id
 
     //conditional parameter handling
     //note, library_id is mandatory, not optional ergo there is not if statement for it
@@ -106,16 +107,15 @@ router.get("/filter", (req, res) => {
     }
 
     if(ownership){
-      queryString += ' AND books.name = $' + (values.length + 1)
+      queryString += ' AND books.ownership = $' + (values.length + 1)
       values.push(ownership)
     }
 
     console.log([values])
 
     //logs for testing purposes, delete for production
-    console.log('rating:', rating);
-    console.log("library id", library_id)
-    console.log('getBooksByRating triggering');
+    
+    console.log('getBooksByFilter triggering');
     console.log('QUERY STRING', queryString)
     return db.query(queryString, values) // Pass author as a parameter to the query
       .then(({ rows }) => {
@@ -124,11 +124,12 @@ router.get("/filter", (req, res) => {
       })
       .catch(error => {
         console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ success: false, error: "Internal server error" });
       });
+      
   };
 
-  filterLibrary(rating, library_id, authorName, name, ownership);
+  filterLibrary(library_id, authorName, rating, name, ownership);
 });
 
 

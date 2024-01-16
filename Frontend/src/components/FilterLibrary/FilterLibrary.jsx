@@ -1,13 +1,14 @@
 import React, { useState, useReducer, useEffect} from 'react';
 import './SignUpLogIn.scss';
-import { loginReducer, loginState } from '../../hooks/loginReducer';
+import { filterReducer, initialFilterState } from '../../hooks/filterReducerReducer';
 
 //LOGGED IN
 
 
-const FilterLibrary = ({ closeModal, setIsSignUp }) => {
+const FilterLibrary = ({ closeModal }) => {
 
-  const [ userState, loginDispatch] = useReducer(loginReducer, loginState);
+  const [ userState, filterDispatch] = useReducer(filterReducer, initialFilterState);
+
   //const { isLoggedIn } = loginState;
  
   //for testing
