@@ -16,7 +16,7 @@ export default function Book({ book }) {
           <div key={book.id}>
             <div className="img-container">
               {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? (
-                <img src={book.volumeInfo.imageLinks.smallThumbnail} className="cover-image"></img>
+                <img src={book.volumeInfo.imageLinks.smallThumbnail} className="cover-image" alt="cover of book"></img>
               ) : (
                 <p className="no-cover">No Cover Available</p>
               )}
