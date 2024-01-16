@@ -55,16 +55,16 @@ router.post("/create", (req, res) => {
 //"As a user, I want to be able to filter the library by author/subject/alphabetically/ favourited, etc.
 router.get("/filter", (req, res) => {
   //add any additional parameters here
-  const library_id = req.query.library_id;
+  const library_id = req.body.library_id;
 
   if (!library_id) {
     return res.status(400).json({ error: "Library ID is mandatory" });
   }
 
-  const authorName = req.query.author;
-  const rating = req.query.rating;
-  const name = req.query.name;
-  const ownership = req.query.ownership;
+  const authorName = req.body.author;
+  const rating = req.body.rating;
+  const name = req.body.name;
+  const ownership = req.body.ownership;
 
   //be sure to update the argumetns if you add any params
   //be sure to ALSO UPDATE THE ARGUEMENTS IN THE FUNCTION CALL AT THE BOTTOM OF THE ROUTE!

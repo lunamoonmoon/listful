@@ -2,7 +2,7 @@ const initialFilterState = {
   filterResults: [],
 };
 
-const bookReducer = (state, action) => {
+const filterReducer = (state, action) => {
   switch (action.type) {
     case 'SET_FILTER_RESULTS':
       return{ ...state, filterResults: action.payload.filterResults.items };

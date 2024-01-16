@@ -18,8 +18,8 @@ VALUES
 INSERT INTO BOOKS (LIBRARY_ID, NAME, AUTHOR, RATING, NOTES, BOOK_COVER_LINK, OWNERSHIP)
 VALUES 
   (2, '1984', 'George Orwell', 5, 'So good!', 'http://tinyurl.com/43w7vyrf',true),
-  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', 'http://tinyurl.com/43w7vyrf', true),
-  (1, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', 'http://tinyurl.com/43w7vyrf',false);
+  (2, 'Catch 22', 'Joseph Heller', 5, 'Can I give 6/5 stars!', 'https://en.wikipedia.org/wiki/Catch-22#/media/File:Catch22.jpg', true),
+  (1, 'Twilight', 'Stephanie Meyer', 2, 'Okay but better for younger audiences maybe.', 'https://en.wikipedia.org/wiki/Twilight_%28Meyer_novel%29#/media/File:Twilightbook.jpg',false);
 
 INSERT INTO GENRES (NAME)
 VALUES 
