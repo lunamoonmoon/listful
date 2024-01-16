@@ -1,15 +1,45 @@
 .user-component {
-
   .toggle-switch {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+
     button {
       margin: 0 10px;
+      padding: 10px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      transition: background-color 1.0s, color 0.3s; // Add transition here
+
+      &.active {
+        background-color: #3498db;
+        color: #fff;
+        border-radius: 5px;
+      }
     }
   }
+
   .create-list-button {
     float: right;
+  }
 
+  .toggle-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out; // Add transition here
+  }
+
+  &.my-books-active {
+    .toggle-content {
+      max-height: 1000px; // Adjust to your content's height
+    }
+  }
+
+  &.my-lists-active {
+    .toggle-content {
+      max-height: 1000px; // Adjust to your content's height
+    }
   }
 }
