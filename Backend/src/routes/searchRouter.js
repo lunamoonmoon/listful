@@ -7,8 +7,8 @@ const router = require("express").Router();
 router.get('/', async (req, res) => {
   const searchTerm = req.query.searchTerm;
   try {
-    const searchResults = await searchBooks(searchTerm)
-    res.json({ searchResults });
+    const bookResults = await searchBooks(searchTerm)
+    res.json({ bookResults });
   } catch (err) {
     res.status(500).json({ err })
   }
@@ -17,8 +17,8 @@ router.get('/', async (req, res) => {
 router.get('/catalogue', async(req, res) => {
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
   try {
-    const catalogueResults = await getBooks()
-    res.json({ catalogueResults });
+    const bookResults = await getBooks()
+    res.json({ bookResults });
   } catch (err) {
     res.status(500).json({ err })
   }
