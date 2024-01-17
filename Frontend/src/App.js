@@ -95,7 +95,7 @@ function App() {
      {showUserComponent ? (
         <User openModal={openModal} />
       ) : (
-        <Home openModal={openModal} bookResults={bookResults} moreBooks={moreBooks} />
+        <Home openModal={openModal} closeModal={closeModal} bookResults={bookResults} moreBooks={moreBooks} />
       )}
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.props.title} buttons={modalContent.props.buttons} body={modalContent} />

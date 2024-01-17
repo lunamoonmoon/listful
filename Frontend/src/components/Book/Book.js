@@ -2,7 +2,7 @@ import React from "react";
 import "./Book.scss";
 import BookDetails from "../BookDetails/BookDetails";
 
-export default function Book({ bookResults, openModal, moreBooks }) {
+export default function Book({ bookResults, openModal, closeModal, moreBooks }) {
 
   const handleAddBook = (book) => {
     const postData = {
@@ -15,6 +15,18 @@ export default function Book({ bookResults, openModal, moreBooks }) {
       notes: 'no notes',
     };
     handlePostInsertBook(postData);
+    notifyUser();
+  };
+
+  function notifyUser() {
+    openModal(
+      <div>
+      <p>Successfully added to your library!</p>
+      </div>
+    );
+    setTimeout(() =>{
+      closeModal();
+    }, 1000);
   };
 
   function handlePostInsertBook(postData) {

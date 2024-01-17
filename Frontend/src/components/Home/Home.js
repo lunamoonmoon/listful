@@ -4,7 +4,7 @@ import Book from '../Book/Book';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import './Home.scss';
 
-export default function Home({ openModal, bookResults, moreBooks }) {
+export default function Home({ openModal, closeModal, bookResults, moreBooks }) {
 
   const handleSignUpNowClick = () => {
     openModal(<SignUpLogIn closeModal={() => openModal(null)} />);
@@ -14,7 +14,7 @@ export default function Home({ openModal, bookResults, moreBooks }) {
     <div data-testid='Home'>
       {bookResults.length > 0 ? (
         <div>
-          <Book bookResults={bookResults} openModal={openModal} moreBooks={moreBooks} />
+          <Book bookResults={bookResults} openModal={openModal} closeModal={closeModal} moreBooks={moreBooks} />
           <ScrollToTop />
         </div>
       ) : (
