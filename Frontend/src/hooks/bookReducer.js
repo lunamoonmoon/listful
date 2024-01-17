@@ -8,8 +8,6 @@ const bookReducer = (state, action) => {
       return{ ...state, bookResults: action.payload.bookResults.items };
     case 'CLEAR_BOOK_RESULTS':
       return { ...state, bookResults: [] };
-    case 'FETCH_MORE_BOOKS':
-      return{ ...state, bookResults: [...state.bookResults] };
     default:
       return state;
   }

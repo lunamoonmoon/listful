@@ -2,7 +2,7 @@ import React from "react";
 import "./Book.scss";
 import BookDetails from "../BookDetails/BookDetails";
 
-export default function Book({ bookResults, openModal, closeModal, moreBooks }) {
+export default function Book({ bookResults, openModal, closeModal }) {
 
   const handleAddBook = (book) => {
     const postData = {
@@ -67,7 +67,6 @@ export default function Book({ bookResults, openModal, closeModal, moreBooks }) 
           </div>
         );
       })}
-      <button onClick={moreBooks} className="see-more">See More</button>
     </div>
   );
 };
