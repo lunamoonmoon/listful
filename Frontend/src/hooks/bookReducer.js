@@ -5,7 +5,7 @@ const initialBookState = {
 const bookReducer = (state, action) => {
   switch (action.type) {
     case 'SET_BOOK_RESULTS':
-      return{ ...state, bookResults: action.payload.catalogueResults.items };
+      return{ ...state, bookResults: action.payload.bookResults.items };
     case 'CLEAR_BOOK_RESULTS':
       return { ...state, bookResults: [] };
     default:

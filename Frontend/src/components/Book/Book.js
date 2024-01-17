@@ -2,7 +2,7 @@ import React from "react";
 import "./Book.scss";
 import BookDetails from "../BookDetails/BookDetails";
 
-export default function Book({ bookResults, openModal }) {
+export default function Book({ bookResults, openModal, closeModal }) {
 
   const handleAddBook = (book, closeModal) => {
     const postData = {
@@ -14,8 +14,20 @@ export default function Book({ bookResults, openModal }) {
       book_cover_link: book.volumeInfo.imageLinks?.smallThumbnail || 'no cover',
       notes: 'no notes',
     };
-    handlePostInsertBook(postData, closeModal);
-  }
+    handlePostInsertBook(postData);
+    notifyUser();
+  };
+
+  function notifyUser() {
+    openModal(
+      <div>
+      <p>Successfully added to your library!</p>
+      </div>
+    );
+    setTimeout(() =>{
+      closeModal();
+    }, 1000);
+  };
 
   function handlePostInsertBook(postData, closeModal) {
     fetch('http://localhost:8001/books/insert', {

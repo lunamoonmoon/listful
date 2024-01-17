@@ -1,5 +1,4 @@
 import React, { useState, useReducer } from "react";
-import { initialState, searchReducer } from "./hooks/searchReducer";
 import { initialBookState, bookReducer } from "./hooks/bookReducer";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
@@ -14,8 +13,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showUserComponent, setShowUserComponent] = useState(false); //user test
 
-  const [state, dispatch] = useReducer(searchReducer, initialState);
-  const { searchResults } = state;
+  const [bookState, bookDispatch] = useReducer(bookReducer, initialBookState);
+  const { bookResults } = bookState;
 
   //lets user search term go to backend and fetch from api
   async function handleSearch() {
@@ -31,15 +30,12 @@ function App() {
         throw new Error(`Error: ${res.status}`);
       }
       const data = await res.json();
-      dispatch({ type: "SET_SEARCH_RESULTS", payload: data });
+      bookDispatch({ type: "SET_BOOK_RESULTS", payload: data });
       setShowUserComponent(false);
     } catch (err) {
       console.error(`Error fetching books: ${err}`);
     }
   }
-
-  const [bookState, bookDispatch] = useReducer(bookReducer, initialBookState);
-  const { bookResults } = bookState;
 
   //lets catalogue go to backend and fetch from api
   async function handleCatalogue() {
@@ -51,9 +47,7 @@ function App() {
         throw new Error(`Error: ${res.status}`);
       }
       const data = await res.json();
-
       bookDispatch({ type: 'SET_BOOK_RESULTS', payload: data });
-      dispatch({ type: 'CLEAR_SEARCH_RESULTS' });
       setShowUserComponent(false);
     } catch(err) {
       console.error(`Error fetching books: ${err}`)
@@ -61,8 +55,8 @@ function App() {
   }
 
   const clearBooks = () => {
-    dispatch({ type: "CLEAR_SEARCH_RESULTS" });
     bookDispatch({ type: "CLEAR_BOOK_RESULTS" });
+    setShowUserComponent(false);
   };
 
   const openModal = (content) => {
@@ -88,7 +82,7 @@ function App() {
      {showUserComponent ? (
         <User openModal={openModal} />
       ) : (
-        <Home openModal={openModal} searchResults={searchResults} bookResults={bookResults} />
+        <Home openModal={openModal} closeModal={closeModal} bookResults={bookResults} />
       )}
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.props.title} buttons={modalContent.props.buttons} body={modalContent} />
