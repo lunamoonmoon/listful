@@ -13,6 +13,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showUserComponent, setShowUserComponent] = useState(false); //user test
+  const [page, setPage] = useState(1);
 
   const [state, dispatch] = useReducer(searchReducer, initialState);
   const { searchResults } = state;
@@ -60,6 +61,19 @@ function App() {
     }
   }
 
+  const moreBooks = async () => {
+    try {
+      const res = await fetch(
+
+      );
+      let newBooks = res.data.items || [];
+      bookDispatch({ type: 'FETCH_MORE_BOOKS', payload: { newBooks }});
+      setPage(page + 1);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const clearBooks = () => {
     dispatch({ type: "CLEAR_SEARCH_RESULTS" });
     bookDispatch({ type: "CLEAR_BOOK_RESULTS" });
@@ -88,7 +102,7 @@ function App() {
      {showUserComponent ? (
         <User openModal={openModal} />
       ) : (
-        <Home openModal={openModal} searchResults={searchResults} bookResults={bookResults} />
+        <Home openModal={openModal} searchResults={searchResults} bookResults={bookResults} moreBooks={moreBooks} />
       )}
       {isModalOpen && modalContent && (
         <Modal closeModal={closeModal} title={modalContent.props.title} buttons={modalContent.props.buttons} body={modalContent} />

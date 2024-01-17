@@ -2,7 +2,7 @@ import React from "react";
 import "./Book.scss";
 import BookDetails from "../BookDetails/BookDetails";
 
-export default function Book({ bookResults, openModal }) {
+export default function Book({ bookResults, openModal, moreBooks }) {
 
   const handleAddBook = (book) => {
     const postData = {
@@ -15,7 +15,7 @@ export default function Book({ bookResults, openModal }) {
       notes: 'no notes',
     };
     handlePostInsertBook(postData);
-  }
+  };
 
   function handlePostInsertBook(postData) {
     fetch('http://localhost:8001/books/insert', {
@@ -55,6 +55,7 @@ export default function Book({ bookResults, openModal }) {
           </div>
         );
       })}
+      <button onClick={moreBooks} className="see-more">See More</button>
     </div>
   );
 };
