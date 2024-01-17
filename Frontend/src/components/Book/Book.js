@@ -4,7 +4,7 @@ import BookDetails from "../BookDetails/BookDetails";
 
 export default function Book({ bookResults, openModal }) {
 
-  const handleAddBook = (book) => {
+  const handleAddBook = (book, closeModal) => {
     const postData = {
       library_id: 1,
       name: book.volumeInfo.title,
@@ -14,10 +14,10 @@ export default function Book({ bookResults, openModal }) {
       book_cover_link: book.volumeInfo.imageLinks?.smallThumbnail || 'no cover',
       notes: 'no notes',
     };
-    handlePostInsertBook(postData);
+    handlePostInsertBook(postData, closeModal);
   }
 
-  function handlePostInsertBook(postData) {
+  function handlePostInsertBook(postData, closeModal) {
     fetch('http://localhost:8001/books/insert', {
       method: 'POST',
       headers: {
@@ -26,6 +26,10 @@ export default function Book({ bookResults, openModal }) {
       body: JSON.stringify(postData),
     })
       .then(response => response.json())
+      .then(() => {
+        // Book added successfully, close the modal
+        closeModal();
+      })
       .catch(error => console.error('Error:', error));
   };
 
@@ -40,7 +44,7 @@ export default function Book({ bookResults, openModal }) {
                 closeModal={() => openModal(null)}
                 book={book}
                 buttons={
-                  <button onClick={() => handleAddBook(book)}>Add to my Library</button>
+                  <button onClick={() => handleAddBook(book, () => openModal(null))}>Add to my Library</button>
                 }
                 title={book.volumeInfo.title}
               />

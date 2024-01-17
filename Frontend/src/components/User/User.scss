@@ -11,7 +11,7 @@
       border: none;
       outline: none;
       background-color: transparent;
-      transition: background-color 1.0s, color 0.3s; // Add transition here
+      transition: background-color 1.0s, color 0.3s;
 
       &.active {
         background-color: #3498db;
@@ -28,18 +28,18 @@
   .toggle-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out; // Add transition here
+    transition: max-height 0.3s ease-in-out; 
   }
 
   &.my-books-active {
     .toggle-content {
-      max-height: 1000px; // Adjust to your content's height
+      max-height: 1000px; 
     }
   }
 
   &.my-lists-active {
     .toggle-content {
-      max-height: 1000px; // Adjust to your content's height
+      max-height: 1000px;
     }
   }
 }

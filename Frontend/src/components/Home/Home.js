@@ -16,12 +16,16 @@ export default function Home({ openModal, searchResults, bookResults }) {
       ) : (
         <div className='home-container'>
           <div className="logo">
-            <img src={process.env.PUBLIC_URL + "/listful_logo_transparent_graphic.png"}alt="Listful Logo" />
+            <img src={process.env.PUBLIC_URL + "/listful_logo_transparent_graphic.png"} alt="Listful Logo" />
           </div>
           <div className='home-hero'>
-          <h1 className='heading'>Save all your favourite books in one spot</h1>
-          <p>Organize your books, one list at a time with your Listful Library, a web app that collates your library in one easy location.</p>
-          <button onClick={handleSignUpNowClick}>Sign Up Now</button>
+            <div className="additional-text">
+              <h1 className='sub-heading'>Listful Library</h1>
+              <h3 className='sub-text'>Where Your Books Find Their Lists</h3>
+            </div>
+            <h1 className='heading'>Save all your favourite books in one spot</h1>
+            <p>Organize your books, one list at a time with your Listful Library, a web app that collates your library in one easy location.</p>
+            <button onClick={handleSignUpNowClick}>Sign Up Now</button>
           </div>
         </div>
       )}
