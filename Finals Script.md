@@ -2,7 +2,7 @@
 
 Title: Listful App Showcase
 
-**Taylor:** Hi everyone! I'm Taylor, part of our dynamic team alongside Luna, Jeremy, and India. Together, we crafted a game-changing library app called 'Listful' for our final project, and today, we're thrilled to dive into the exciting features. But before that, let's quickly introduce ourselves. Before my time at Lighthouse Labs, I navigated the world of sales in both local software companies and even a FAANG giant. These experiences fueled my curiosity for software development, leading me here.
+**Taylor:** Hi everyone! I'm Taylor, part of our dynamic team alongside Luna, Jeremy, and India. Together, we crafted a game-changing library app called 'Listful' for our final project, and today, we're thrilled to dive into the exciting features. But before that, let's quickly introduce ourselves. Before my time at Lighthouse Labs, I navigated the world of sales in 3 different softeare companies. These experiences fueled my curiosity for software development, leading me here.
 
 **Luna:** 15-20 second Introduction
 
@@ -40,7 +40,7 @@ Title: Listful App Showcase
 
 **Taylor:** "Wow, that modal looks great, India! To sum up, our library app is designed for personalization, effortless browsing, community insights, and a rich book-viewing experience. We're thrilled to bring you this seamless and enjoyable way to connect with your favorite reads.
 
-Thank you for your time, and we're here to answer any questions you may have!"
+In the future, if this were for production there are definitely some things we would like to add, like a text box in the modal so that users can add comments or reviews about each book, or creating a dark mode for our readers. I'd like to give space for my team mates to say anything more but with that, thank you for your time, and we're here to answer any questions you may have!"
 
 [The team members smile, and the presentation concludes within the 5-minute timeframe.]
 
