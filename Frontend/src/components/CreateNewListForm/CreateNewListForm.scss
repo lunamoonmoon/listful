@@ -1,0 +1,58 @@
+.form {
+  font-family: "Poppins", sans-serif;
+
+.label {
+  font-family: "Poppins", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.list-title {
+  font-family: "Poppins", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 50px;
+
+  list {
+    font-family: "Poppins", sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+}
+
+.button {
+  margin-top: 50px;
+  float: right;
+  border-radius: 8px;
+  border-width: 0;
+  padding: 10px 12px;
+  text-align: center;
+  margin: 0.25rem;
+  background-color: #00cf75;
+  color: white;
+
+  &:hover {
+    background-color: darkgray;
+  }
+}
+
+.button-two {
+  margin-top: 50px;
+  float: right;
+  border-radius: 8px;
+  border-width: 0;
+  padding: 10px 12px;
+  text-align: center;
+  margin: 0.25rem;
+  background-color: #d94343;
+  color: white;
+
+  &:hover {
+    background-color: darkgray;
+  }
+}
+}

@@ -3,42 +3,52 @@
   font-family: 'Poppins', sans-serif;
 
   .slick-arrow {
-    font-size: 18px;
-    line-height: 1;
-    color: #333;
+    font-size: 0; /* Hide any potential text */
+    color: transparent;
     cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    background: #fff;
+    background: transparent;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid transparent;
     border-radius: 50%;
+
+    &:before {
+      display: block;
+      font-family: 'Font Awesome Free 5.15.4'; 
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      color: #3d3b3b; /* Arrow color */
+      font-weight: bolder;
+    }
   }
 
   .slick-prev {
-    left: 50;
+    left: 0;
   }
 
   .slick-next {
-    right: 50;
+    right: 0;
   }
 
   .slick-track {
-    display: flex; // Set the display property to flex
-    justify-content: flex-start; // Align items at the start of the flex container
-    align-items: center; // Align items at the center of the flex container
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .slick-slide {
-    display: flex; // Set the display property to flex
-    justify-content: center; // Center the content horizontally
-    align-items: center; // Center the content vertically
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .list-item {
     outline: none;
-    margin: 0 10px; // Adjust the margin between list items
+    margin: 0 10px;
   }
 }

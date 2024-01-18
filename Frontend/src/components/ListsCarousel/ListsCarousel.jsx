@@ -9,12 +9,11 @@ import "slick-carousel/slick/slick-theme.css";
 const ListsCarousel = ({ libraries, onBookClick, onCreateList }) => {
   const sliderSettings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 6, 
+    slidesToShow: 6,
     slidesToScroll: 6,
   };
-
   return (
     <div className="lists-carousel">
       {libraries &&

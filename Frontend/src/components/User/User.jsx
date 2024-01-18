@@ -1,10 +1,8 @@
-// UserComponent.js
 import React, { useState, useEffect } from "react";
 import "./User.scss";
 import ListsCarousel from "../ListsCarousel/ListsCarousel";
 import BookGrid from "../BookGrid/BookGrid";
 import BookDetails from "../BookDetails/BookDetails";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import CreateNewListForm from "../CreateNewListForm/CreateNewListForm";
 
 export default function UserComponent({ openModal }) {
@@ -14,6 +12,7 @@ export default function UserComponent({ openModal }) {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isCreateListModalOpen, setIsCreateListModalOpen] = useState(false);
   const [createdLists, setCreatedLists] = useState([]);
+  const [libraryAdded, setLibraryAdded] = useState(false);
 
   const BOOKS_API_URL = "http://localhost:8001/books/users/";
   const LIBRARIES_API_URL = "http://localhost:8001/libraries/users/";
@@ -25,16 +24,9 @@ export default function UserComponent({ openModal }) {
     fetch(`${BOOKS_API_URL}${userId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("user books:", data);
-
-        // Filter out duplicate books based on their title
-        const uniqueBooks = Array.from(
-          new Set(data.map((book) => book.name))
-        ).map((title) => data.find((book) => book.name === title));
-
         const bookData = [];
 
-        uniqueBooks.forEach((book) => {
+        data.forEach((book) => {
           bookData.push({
             id: book.id,
             volumeInfo: {
@@ -94,13 +86,12 @@ export default function UserComponent({ openModal }) {
             }
           });
         });
-        console.log("check:", libraryData);
         setLibraries(libraryData);
       })
       .catch((error) =>
         console.error("Error fetching user libraries:", error.message)
       );
-  }, []);
+  }, [libraryAdded]);
 
   const openCreateListModal = () => {
     openModal(
@@ -139,32 +130,28 @@ export default function UserComponent({ openModal }) {
       const newList = await response.json();
 
       for (const bookToAdd of selectedBooks) {
-        const bookAddedResponse = await fetch("http://localhost:8001/books/assign_library", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            library_id: newList.library.id,
-            book_id: bookToAdd.id,
-          }),
-        });
-  
+        const bookAddedResponse = await fetch(
+          "http://localhost:8001/books/assign_library",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              library_id: newList.library.id,
+              book_id: bookToAdd,
+            }),
+          }
+        );
+
         if (!bookAddedResponse.ok) {
           throw new Error("Failed to add the book to the library");
         }
-  
-        // const newList = await response.json();
       }
 
-      setLibraries((prevLibraries) =>[
-        ...prevLibraries,
-        { category: newList.library_name, books: [selectedBooks] },
-      ]);
-
-      setCreatedLists((prevCreatedLists) => [...prevCreatedLists, newList]);
-
       closeCreateListModal();
+
+      setLibraryAdded(!libraryAdded);
     } catch (error) {
       console.error("Error creating the list:", error.message);
     }
@@ -187,7 +174,7 @@ export default function UserComponent({ openModal }) {
           className={isMyBooks ? "" : "active"}
           onClick={() => {
             setIsMyBooks(false);
-            setSelectedBook(null); 
+            setSelectedBook(null);
           }}
         >
           My Lists
@@ -201,21 +188,16 @@ export default function UserComponent({ openModal }) {
             openModal={openModal}
           />
         ) : (
-          <>
-            <ListsCarousel
-              libraries={[...libraries, ...createdLists]}
-              onCreateList={(newList) =>
-                setCreatedLists([...createdLists, newList])
-              }
-            />
-            <button
-              className="create-list-button"
-              onClick={openCreateListModal}
-            >
-              Create a List
-            </button>
-          </>
+          <ListsCarousel
+            libraries={[...libraries, ...createdLists]}
+            onCreateList={(newList) =>
+              setCreatedLists([...createdLists, newList])
+            }
+          />
         )}
+        <button className="create-list-button" onClick={openCreateListModal}>
+          Create a List
+        </button>
       </div>
 
       {selectedBook && (
@@ -224,15 +206,6 @@ export default function UserComponent({ openModal }) {
           onClose={() => setSelectedBook(null)}
         />
       )}
-      {/* {isCreateListModalOpen && (
-        <CreateNewListForm
-          onSubmit={(listName, selectedBooks) =>
-            handleCreateListSubmit(listName, selectedBooks)
-          }
-          onCancel={closeCreateListModal}
-          books={userBooks}
-        />
-      )} */}
     </div>
   );
 }

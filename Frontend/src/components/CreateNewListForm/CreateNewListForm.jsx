@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "./CreateNewListForm.scss";
 
 const CreateNewListForm = ({ onSubmit, onCancel, books }) => {
-  const [listName, setListName] = useState('');
+  const [listName, setListName] = useState("");
   const [selectedBooks, setSelectedBooks] = useState([]);
 
   const handleSubmit = (event) => {
@@ -24,14 +25,18 @@ const CreateNewListForm = ({ onSubmit, onCancel, books }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className="form" onSubmit={handleSubmit}>
+      <label className="label">
         New List Name:
-        <input type="text" value={listName} onChange={(event) => setListName(event.target.value)} />
+        <input
+          type="text"
+          value={listName}
+          onChange={(event) => setListName(event.target.value)}
+        />
       </label>
-      <h4>Select books to add to the list:</h4>
+      <h4 className="list-title">Select books to add to the list:</h4>
       {books.map((book) => (
-        <div key={book.id}>
+        <div className="list" key={book.id}>
           <input
             type="checkbox"
             id={`book-${book.id}`}
@@ -41,8 +46,12 @@ const CreateNewListForm = ({ onSubmit, onCancel, books }) => {
           <label htmlFor={`book-${book.id}`}>{book.volumeInfo.title}</label>
         </div>
       ))}
-      <button type="submit">Create List</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <button className="button" type="submit">
+        Create List
+      </button>
+      <button className="button-two" type="button" onClick={onCancel}>
+        Cancel
+      </button>
     </form>
   );
 };

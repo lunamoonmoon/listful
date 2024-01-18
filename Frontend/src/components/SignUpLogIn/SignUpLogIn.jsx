@@ -12,8 +12,6 @@ const SignUpLogIn = ({ closeModal, setIsSignUp }) => {
  
   //for testing
   useEffect(() => {
-    console.log("userState", userState);
-
     // Close the modal when login state is set to 1
     if (userState.loginState === 1) {
       closeModal(); // Implement closeModal function to hide the modal
@@ -26,20 +24,11 @@ const SignUpLogIn = ({ closeModal, setIsSignUp }) => {
     //hard coded for testing
     loginDispatch({ type: 'SET_LOGIN', payload: 1 });
   
-
-    // // Implement authentication logic here with the routes we created - once signed up, render the catalogue page component
-    // if (isSignUp) {
-    //   console.log('Sign-up submitted');
-    // } else {
-    //   console.log('Login submitted');
-    // }
-  
     // // Toggle the value of isSignUp
     // setIsSignUp(!isSignUp);
   };
 
   useEffect(() => {
-    console.log("login State", userState);
   }, [userState.loginState]);
 
   return (
