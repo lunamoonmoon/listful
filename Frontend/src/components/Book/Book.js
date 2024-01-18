@@ -5,14 +5,15 @@ import BookDetails from "../BookDetails/BookDetails";
 export default function Book({ bookResults, openModal, closeModal }) {
 
   const handleAddBook = (book, closeModal) => {
+    const authorName = book.volumeInfo.authors.join(", ") || 'no author';
     const postData = {
       library_id: 1,
       name: book.volumeInfo.title,
-      author: book.volumeInfo.author || 'no author',
+      author: authorName,
       rating: 0,
       ownership: false,
       book_cover_link: book.volumeInfo.imageLinks?.smallThumbnail || 'no cover',
-      notes: 'no notes',
+      notes: book.volumeInfo.description || 'no notes',
     };
     handlePostInsertBook(postData);
     notifyUser();
