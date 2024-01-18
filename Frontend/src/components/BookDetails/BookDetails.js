@@ -7,6 +7,7 @@ export default function Book({ book }) {
     title,
     authors,
     description,
+    notes,
   } = book.volumeInfo
 
   const handleStars = (stars) => {
@@ -34,7 +35,7 @@ export default function Book({ book }) {
               </div>
             </div>
             <p>by {authors.join(', ')}</p>
-            <p>{description}</p>
+            <p>{notes}</p>
           </div>
     </div>
   );

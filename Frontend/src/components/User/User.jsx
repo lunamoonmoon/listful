@@ -36,7 +36,7 @@ export default function UserComponent({ openModal }) {
               imageLinks: {
                 smallThumbnail: book.book_cover_link,
               },
-              description: book.notes || "",
+              description: book.notes,
               notes: book.notes,
               ownership: book.ownership,
             },
