@@ -33,20 +33,25 @@ router.post("/create", (req, res) => {
       newLibObj.public,
     ];
 
-    db.query(queryString, values)
-      .then(() => {
-        console.log("New library created");
-        res.json({ success: true });
+    return db.query(queryString, values)
+      .then((result) => {
+        // console.log("New library created");
+        // res.json({ success: true });
+        return result.rows[0];
       })
-      .catch((error) => {
-        console.error(error);
-        res
-          .status(500)
-          .json({ success: false, error: "Internal server error" });
-      });
   };
 
-  createLib(newLibObj);
+  createLib(newLibObj)
+    .then((library) => {
+      console.log("New library created");
+      res.json({ success: true, library });
+    })
+    .catch((error) => {
+      console.error(error);
+      res
+        .status(500)
+        .json({ success: false, error: "Internal server error" });
+    });
 });
 
 //

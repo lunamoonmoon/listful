@@ -22,8 +22,21 @@
   }
 
   .create-list-button {
+    margin-top: 50px;
     float: right;
+    border-radius: 8px;
+    border-width: 0;
+    padding: 10px 12px;
+    text-align: center;
+    margin: 0.25rem;
+    background-color: #3498db;
+    color: white;
+
+    &:hover {
+      background-color: darkgray;
+    }
   }
+
 
   .toggle-content {
     max-height: 0;
